@@ -1,0 +1,24 @@
+{
+  "name": "csfin-rest-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/csfin-rest-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "csfin-rest-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "csfin-rest-api:build:development"
+        },
+        "production": {
+          "buildTarget": "csfin-rest-api:build:production"
+        }
+      }
+    }
+  }
+}
