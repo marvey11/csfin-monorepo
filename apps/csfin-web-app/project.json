@@ -1,0 +1,9 @@
+{
+  "name": "csfin-web-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/csfin-web-app/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project csfin-web-app --web",
+  "targets": {}
+}
