@@ -1,9 +1,9 @@
-import NxWelcome from './nx-welcome';
+import { Outlet } from "react-router-dom";
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="csfin-web-app" />
+      <Outlet />
     </div>
   );
 }

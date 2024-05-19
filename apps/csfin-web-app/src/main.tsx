@@ -1,13 +1,41 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
+import { StrictMode } from "react";
+import * as ReactDOM from "react-dom/client";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import App from "./app/App";
+import { SecurityLayout } from "./components";
+import {
+  CreateSecurityPage,
+  SecurityDetailsPage,
+  SecurityListPage,
+} from "./pages";
+import { EditSecurityPage } from "./pages/EditSecurityPage";
 
-import App from './app/app';
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="securities">
+        <Route index element={<SecurityListPage />} />
+        <Route path="create" element={<CreateSecurityPage />} />
+        <Route path=":id" element={<SecurityLayout />}>
+          <Route index element={<SecurityDetailsPage />} />
+          <Route path="edit" element={<EditSecurityPage />} />
+        </Route>
+      </Route>
+    </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>
 );

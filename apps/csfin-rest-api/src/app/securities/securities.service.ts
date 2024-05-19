@@ -9,7 +9,7 @@ import { Security } from "./entities/security.entity";
 export class SecuritiesService {
   constructor(
     @InjectRepository(Security)
-    private securitiesRepository: Repository<Security>,
+    private securitiesRepository: Repository<Security>
   ) {}
 
   async create(createDTO: CreateSecurityDto) {
@@ -17,7 +17,10 @@ export class SecuritiesService {
   }
 
   async findAll() {
-    return this.securitiesRepository.find();
+    return this.securitiesRepository
+      .createQueryBuilder("security")
+      .orderBy("security.isin", "ASC")
+      .getMany();
   }
 
   async findOne(id: string) {
@@ -25,8 +28,11 @@ export class SecuritiesService {
   }
 
   async update(id: string, updateDTO: UpdateSecurityDto) {
-    console.log(updateDTO);
-    return `This action updates a #${id} security`;
+    return this.securitiesRepository
+      .findOneByOrFail({ id })
+      .then((security) => {
+        this.securitiesRepository.save({ ...security, ...updateDTO });
+      });
   }
 
   async remove(id: string) {
