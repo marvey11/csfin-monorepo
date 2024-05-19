@@ -4,6 +4,10 @@
   "plugins": ["@nx"],
   "overrides": [
     {
+      "extends": [
+        "plugin:@typescript-eslint/strict",
+        "plugin:@typescript-eslint/stylistic"
+      ],
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nx/enforce-module-boundaries": [
