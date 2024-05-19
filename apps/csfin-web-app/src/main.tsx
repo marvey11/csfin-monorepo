@@ -10,10 +10,10 @@ import App from "./app/App";
 import { SecurityLayout } from "./components";
 import {
   CreateSecurityPage,
+  EditSecurityPage,
   SecurityDetailsPage,
   SecurityListPage,
 } from "./pages";
-import { EditSecurityPage } from "./pages/EditSecurityPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
