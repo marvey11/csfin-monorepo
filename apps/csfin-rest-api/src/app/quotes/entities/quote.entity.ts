@@ -1,13 +1,20 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { SecuritiesExchange } from "../../exchanges/entities/exchange.entity";
 import { Security } from "../../securities/entities/security.entity";
 
 @Entity()
+@Index(["security.id", "exchange.id", "date"], { unique: true })
 export class QuoteData {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: "date", unique: true })
+  @Column({ type: "date" })
   date: Date;
 
   @Column({ type: "numeric" })

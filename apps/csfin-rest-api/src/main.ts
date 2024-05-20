@@ -5,6 +5,7 @@
 
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { json } from "express";
 import { AppModule } from "./app/app.module";
 
 const GLOBAL_PREFIX = "api";
@@ -12,6 +13,7 @@ const GLOBAL_PREFIX = "api";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(GLOBAL_PREFIX);
+  app.use(json({ limit: "4mb" }));
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
