@@ -1,9 +1,10 @@
 import { ExchangeForm } from "../components";
-import useExchange from "../hooks/useEchange";
-import { ExchangeData } from "../types";
+import useOutletContextData from "../hooks/useOutletContextData";
+import { ExchangeData, ExchangeResponseData } from "../types";
 
 export const EditExchangePage = () => {
-  const { exchange, requestData } = useExchange();
+  const { data: exchange, requestData } =
+    useOutletContextData<ExchangeResponseData>();
 
   const updateExchange = (data: ExchangeData) => {
     exchange &&

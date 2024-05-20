@@ -1,11 +1,13 @@
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import useSecurity from "../hooks/useSecurity";
+import useOutletContextData from "../hooks/useOutletContextData";
+import { SecurityResponseData } from "../types";
 
 export const SecurityDetailsPage = () => {
   const navigate = useNavigate();
 
-  const { security, requestData } = useSecurity();
+  const { data: security, requestData } =
+    useOutletContextData<SecurityResponseData>();
 
   const handleDelete = () => {
     if (security) {
