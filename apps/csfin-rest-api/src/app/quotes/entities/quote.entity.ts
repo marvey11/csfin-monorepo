@@ -1,8 +1,9 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { SecuritiesExchange } from "../../exchanges/entities/exchange.entity";
 import { Security } from "../../securities/entities/security.entity";
 
 @Entity()
-export class Quote {
+export class QuoteData {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -16,4 +17,9 @@ export class Quote {
     onDelete: "CASCADE",
   })
   security: Security;
+
+  @ManyToOne(() => SecuritiesExchange, (exchange) => exchange.quotes, {
+    onDelete: "CASCADE",
+  })
+  exchange: SecuritiesExchange;
 }

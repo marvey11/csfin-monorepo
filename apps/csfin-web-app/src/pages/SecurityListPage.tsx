@@ -30,7 +30,7 @@ export const SecurityListPage = () => {
         {data &&
           data.map(({ id, isin, nsin, name, type: securityType }) => (
             <div
-              key={isin}
+              key={id}
               onClick={() => {
                 navigate(`/securities/${id}`);
               }}

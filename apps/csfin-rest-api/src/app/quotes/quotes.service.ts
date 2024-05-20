@@ -1,10 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { SecuritiesExchange } from "../exchanges/entities/exchange.entity";
 import { Security } from "../securities/entities/security.entity";
-import { CreateManyQuotesDto, CreateQuoteDto } from "./dto/create-quote.dto";
+import {
+  CreateManyQuotesDto,
+  CreateQuoteDataDto,
+  QuoteDataItem,
+} from "./dto/create-quote.dto";
 import { UpdateQuoteDto } from "./dto/update-quote.dto";
-import { Quote } from "./entities/quote.entity";
+import { QuoteData } from "./entities/quote.entity";
 
 interface FindISINOnly {
   isin: string;
@@ -28,37 +33,36 @@ export type FindAllQueryParams =
 @Injectable()
 export class QuotesService {
   constructor(
-    @InjectRepository(Quote)
-    private quotesRepository: Repository<Quote>,
+    @InjectRepository(QuoteData)
+    private quotesRepository: Repository<QuoteData>,
     @InjectRepository(Security)
-    private securitiesRepository: Repository<Security>
+    private securitiesRepository: Repository<Security>,
+    @InjectRepository(SecuritiesExchange)
+    private exchangesRepository: Repository<SecuritiesExchange>
   ) {}
 
-  async create(
-    dto: CreateQuoteDto | CreateManyQuotesDto
-  ): Promise<Quote | Quote[]> {
-    const { isin } = dto;
+  async create(createDTO: CreateQuoteDataDto | CreateManyQuotesDto) {
+    const { isin, exchangeName } = createDTO;
     return this.securitiesRepository
       .findOneByOrFail({ isin: isin })
-      .then((security): Promise<Quote | Quote[]> => {
-        if ("quoteItems" in dto) {
-          return this.quotesRepository.save(
-            dto.quoteItems.map((quote): Quote => {
-              const priceItem = this.quotesRepository.create();
-              return { ...priceItem, ...quote, security: security };
-            })
-          );
-        } else {
-          const { price, date } = dto;
-          const priceItem = this.quotesRepository.create();
-          return this.quotesRepository.save({
-            ...priceItem,
-            date,
-            price,
-            security: security,
-          });
-        }
-      })
+      .then(async (security) =>
+        this.exchangesRepository
+          .findOneByOrFail({ name: exchangeName })
+          .then((exchange): Promise<QuoteData | QuoteData[]> => {
+            if ("quoteItems" in createDTO) {
+              return this.quotesRepository.save(
+                createDTO.quoteItems.map((quoteData) =>
+                  this.createQuoteData(security, exchange, quoteData)
+                )
+              );
+            }
+
+            const { date, price } = createDTO;
+            return this.quotesRepository.save(
+              this.createQuoteData(security, exchange, { date, price })
+            );
+          })
+      )
       .catch(() => {
         throw { message: `Could not create quote entity for ISIN ${isin}` };
       });
@@ -92,11 +96,25 @@ export class QuotesService {
     return this.quotesRepository.findOneBy({ id: id });
   }
 
-  update(id: string, updateQuoteDto: UpdateQuoteDto) {
-    return `This action updates a #${id} quote`;
+  async update(id: string, updateDTO: UpdateQuoteDto) {
+    return this.quotesRepository
+      .findOneByOrFail({ id: id })
+      .then((quoteData) => {
+        return this.quotesRepository.save({ ...quoteData, ...updateDTO });
+      });
   }
 
   async remove(id: string) {
     return this.quotesRepository.delete({ id: id });
+  }
+
+  /** Creates a single quote data instance and populates it with the provided data. */
+  private createQuoteData(
+    security: Security,
+    exchange: SecuritiesExchange,
+    quoteItem: QuoteDataItem
+  ): QuoteData {
+    const quoteData = this.quotesRepository.create();
+    return { ...quoteData, ...quoteItem, security, exchange };
   }
 }

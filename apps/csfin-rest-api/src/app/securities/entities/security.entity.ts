@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Quote } from "../../quotes/entities/quote.entity";
+import { QuoteData } from "../../quotes/entities/quote.entity";
 import { SecurityType } from "../dto/create-security.dto";
 
 @Entity()
@@ -29,6 +29,6 @@ export class Security {
   @Column({ type: "enum", enum: SecurityType })
   type: SecurityType;
 
-  @OneToMany(() => Quote, (quote) => quote.security)
-  quotes: Quote[];
+  @OneToMany(() => QuoteData, (quote) => quote.security)
+  quotes: QuoteData[];
 }
