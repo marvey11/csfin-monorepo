@@ -11,24 +11,17 @@ import {
 import { UpdateQuoteDto } from "./dto/update-quote.dto";
 import { QuoteData } from "./entities/quote.entity";
 
-interface FindISINOnly {
+export type FindAllQueryParams = { limit: number } | { "min-date": Date };
+
+interface SingleSecurityQuoteResponse {
   isin: string;
+  exchanges: ExchangeResponse[];
 }
 
-interface FindISINWithMaxCount {
-  isin: string;
-  limit: number;
+interface ExchangeResponse {
+  name: string;
+  quoteData: QuoteData[];
 }
-
-interface FindISINFromDate {
-  isin: string;
-  "min-date": Date;
-}
-
-export type FindAllQueryParams =
-  | FindISINOnly
-  | FindISINWithMaxCount
-  | FindISINFromDate;
 
 @Injectable()
 export class QuotesService {
@@ -68,40 +61,85 @@ export class QuotesService {
       });
   }
 
-  async findAll(query: FindAllQueryParams) {
+  async getQuotesForAll(
+    query?: FindAllQueryParams
+  ): Promise<SingleSecurityQuoteResponse[]> {
+    return this.securitiesRepository
+      .find()
+      .then((securities) =>
+        Promise.all(
+          securities.map((security) => this.getQuotesForOne(security, query))
+        )
+      );
+  }
+
+  async getQuotesForISIN(
+    isin: string,
+    query?: FindAllQueryParams
+  ): Promise<SingleSecurityQuoteResponse> {
+    return this.securitiesRepository
+      .findOneByOrFail({ isin: isin })
+      .then((security) => this.getQuotesForOne(security, query));
+  }
+
+  async getQuotesForOne(
+    security: Security,
+    query?: FindAllQueryParams
+  ): Promise<SingleSecurityQuoteResponse> {
+    return this.exchangesRepository
+      .find()
+      .then((exchanges) =>
+        Promise.all(
+          exchanges.map(
+            async (exchange): Promise<ExchangeResponse> =>
+              this.getQuoteData(security, exchange, query).then((quoteData) => {
+                const { name } = exchange;
+                return { name, quoteData };
+              })
+          )
+        )
+      )
+      .then((exchangeResponses) => ({
+        isin: security.isin,
+        exchanges: exchangeResponses.filter(
+          ({ quoteData }) => quoteData.length > 0
+        ),
+      }));
+  }
+
+  async getQuoteData(
+    security: Security,
+    exchange: SecuritiesExchange,
+    query: FindAllQueryParams = { limit: 1000 }
+  ): Promise<QuoteData[]> {
     const queryBuilder = this.quotesRepository
       .createQueryBuilder("quote")
       .innerJoin("quote.security", "security")
-      .select(["quote.id AS id", "quote.date AS date", "quote.price AS price"])
-      .addSelect("security.isin", "isin");
+      .innerJoin("quote.exchange", "exchange")
+      .where("security.id = :securityId", { securityId: security.id })
+      .andWhere("exchange.id = :exchangeId", { exchangeId: exchange.id })
+      .orderBy("quote.date", "DESC")
+      .select(["quote.date", "quote.price"]);
 
-    if ("isin" in query) {
-      queryBuilder.where("security.isin = :isin", { isin: query.isin });
+    if (query) {
+      if ("limit" in query) {
+        queryBuilder.limit(query.limit);
+      } else if ("min-date" in query) {
+        queryBuilder.andWhere("quote.date >= :minDate", {
+          minDate: query["min-date"],
+        });
+      }
     }
 
-    queryBuilder.orderBy("quote.date", "DESC");
-
-    if ("limit" in query) {
-      queryBuilder.limit(query.limit);
-    } else if ("min-date" in query) {
-      queryBuilder.andWhere("quote.date >= :minDate", {
-        minDate: query["min-date"],
-      });
-    }
-
-    return queryBuilder.getRawMany();
-  }
-
-  async findOne(id: string) {
-    return this.quotesRepository.findOneBy({ id: id });
+    return queryBuilder.getMany();
   }
 
   async update(id: string, updateDTO: UpdateQuoteDto) {
     return this.quotesRepository
       .findOneByOrFail({ id: id })
-      .then((quoteData) => {
-        return this.quotesRepository.save({ ...quoteData, ...updateDTO });
-      });
+      .then((quoteData) =>
+        this.quotesRepository.save({ ...quoteData, ...updateDTO })
+      );
   }
 
   async remove(id: string) {

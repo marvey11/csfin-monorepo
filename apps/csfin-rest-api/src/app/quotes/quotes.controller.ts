@@ -21,20 +21,20 @@ export class QuotesController {
 
   @Post()
   async create(@Body() createDto: CreateQuoteDataDto | CreateManyQuotesDto) {
-    return this.quotesService
-      .create(createDto)
-      .then((result) => result)
-      .catch((error) => error);
+    return this.quotesService.create(createDto);
   }
 
   @Get()
-  async findAll(@Query() query: FindAllQueryParams) {
-    return this.quotesService.findAll(query);
+  async findAll(@Query() query?: FindAllQueryParams) {
+    return this.quotesService.getQuotesForAll(query);
   }
 
-  @Get(":id")
-  async findOne(@Param("id") id: string) {
-    return this.quotesService.findOne(id);
+  @Get("isin/:isin")
+  async getQuotesForISIN(
+    @Param("isin") isin: string,
+    @Query() query?: FindAllQueryParams
+  ) {
+    return this.quotesService.getQuotesForISIN(isin, query);
   }
 
   @Patch(":id")
