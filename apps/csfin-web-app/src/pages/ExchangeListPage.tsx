@@ -6,11 +6,10 @@ import { ExchangeResponseData } from "../types";
 export const ExchangeListPage = () => {
   const navigate = useNavigate();
 
-  const { loading, error, data, requestData } =
-    useAxios<ExchangeResponseData[]>();
+  const { data, sendRequest } = useAxios<ExchangeResponseData[]>();
 
   useEffect(() => {
-    requestData({ url: "/exchanges", method: "get" });
+    sendRequest({ url: "/exchanges", method: "get" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

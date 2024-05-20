@@ -6,12 +6,12 @@ import { ExchangeResponseData } from "../types";
 export const ExchangeDetailsPage = () => {
   const navigate = useNavigate();
 
-  const { data: exchange, requestData } =
+  const { data: exchange, sendRequest } =
     useOutletContextData<ExchangeResponseData>();
 
   const handleDelete = () => {
     if (exchange) {
-      requestData({
+      sendRequest({
         url: `/exchanges/${exchange.id}`,
         method: "delete",
       } satisfies AxiosRequestConfig);

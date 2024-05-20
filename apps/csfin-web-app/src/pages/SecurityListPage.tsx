@@ -7,11 +7,10 @@ import { SecurityResponseData, SecurityType } from "../types";
 export const SecurityListPage = () => {
   const navigate = useNavigate();
 
-  const { loading, error, data, requestData } =
-    useAxios<SecurityResponseData[]>();
+  const { data, sendRequest } = useAxios<SecurityResponseData[]>();
 
   useEffect(() => {
-    requestData({ url: "/securities", method: "get" });
+    sendRequest({ url: "/securities", method: "get" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

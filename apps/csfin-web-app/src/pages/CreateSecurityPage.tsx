@@ -3,10 +3,10 @@ import useAxios from "../hooks/useAxios";
 import { SecurityData } from "../types";
 
 export const CreateSecurityPage = () => {
-  const { requestData } = useAxios();
+  const { sendRequest } = useAxios();
 
   const addSecurity = (data: SecurityData) => {
-    requestData({ url: "/securities", method: "post", data });
+    sendRequest({ url: "/securities", method: "post", data });
   };
 
   return (

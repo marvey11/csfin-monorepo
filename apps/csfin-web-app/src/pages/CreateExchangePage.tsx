@@ -3,10 +3,10 @@ import useAxios from "../hooks/useAxios";
 import { ExchangeData } from "../types";
 
 export const CreateExchangePage = () => {
-  const { requestData } = useAxios();
+  const { sendRequest } = useAxios();
 
   const addExchange = (data: ExchangeData) => {
-    requestData({ url: "/exchanges", method: "post", data });
+    sendRequest({ url: "/exchanges", method: "post", data });
   };
 
   return (

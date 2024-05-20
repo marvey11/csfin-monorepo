@@ -6,12 +6,12 @@ import { SecurityResponseData } from "../types";
 export const SecurityDetailsPage = () => {
   const navigate = useNavigate();
 
-  const { data: security, requestData } =
+  const { data: security, sendRequest } =
     useOutletContextData<SecurityResponseData>();
 
   const handleDelete = () => {
     if (security) {
-      requestData({
+      sendRequest({
         url: `/securities/${security.id}`,
         method: "delete",
       } satisfies AxiosRequestConfig);

@@ -6,10 +6,10 @@ import { SecurityResponseData, UseGenericContextType } from "../types";
 export const SecurityLayout = () => {
   const { id } = useParams();
 
-  const { data, requestData } = useAxios<SecurityResponseData>();
+  const { data, sendRequest } = useAxios<SecurityResponseData>();
 
   useEffect(() => {
-    id && requestData({ url: `/securities/${id}`, method: "get" });
+    id && sendRequest({ url: `/securities/${id}`, method: "get" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -19,7 +19,7 @@ export const SecurityLayout = () => {
       context={
         {
           data,
-          requestData,
+          sendRequest,
         } satisfies UseGenericContextType<SecurityResponseData>
       }
     />

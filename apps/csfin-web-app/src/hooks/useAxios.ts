@@ -8,7 +8,7 @@ const useAxios = <T>() => {
   const [data, setData] = useState<T>();
   const [controller, setController] = useState<AbortController>();
 
-  const requestData = async (config: AxiosRequestConfig) => {
+  const sendRequest = async (config: AxiosRequestConfig) => {
     setLoading(true);
     setError("");
     setData(undefined);
@@ -41,7 +41,7 @@ const useAxios = <T>() => {
     };
   }, [controller]);
 
-  return { loading, error, data, requestData };
+  return { loading, error, data, sendRequest };
 };
 
 export default useAxios;
