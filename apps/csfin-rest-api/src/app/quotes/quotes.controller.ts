@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from "@nestjs/common";
-import { CreateQuoteDto } from "./dto/create-quote.dto";
+import { CreateManyQuotesDto, CreateQuoteDto } from "./dto/create-quote.dto";
 import { UpdateQuoteDto } from "./dto/update-quote.dto";
 import { FindAllQueryParams, QuotesService } from "./quotes.service";
 
@@ -17,9 +17,9 @@ export class QuotesController {
   constructor(private readonly quotesService: QuotesService) {}
 
   @Post()
-  async create(@Body() createQuoteDto: CreateQuoteDto) {
+  async create(@Body() createDto: CreateQuoteDto | CreateManyQuotesDto) {
     return this.quotesService
-      .create(createQuoteDto)
+      .create(createDto)
       .then((result) => result)
       .catch((error) => error);
   }
@@ -37,7 +37,7 @@ export class QuotesController {
   @Patch(":id")
   async update(
     @Param("id") id: string,
-    @Body() updateQuoteDto: UpdateQuoteDto,
+    @Body() updateQuoteDto: UpdateQuoteDto
   ) {
     return this.quotesService.update(id, updateQuoteDto);
   }
