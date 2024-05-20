@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { escape } from "querystring";
 import { Repository } from "typeorm";
-import { CreateSecurityDto } from "./dto/create-security.dto";
-import { UpdateSecurityDto } from "./dto/update-security.dto";
+import { CreateSecurityDto, UpdateSecurityDto } from "./dto";
 import { Security } from "./entities/security.entity";
 
 @Injectable()
@@ -12,8 +12,18 @@ export class SecuritiesService {
     private securitiesRepository: Repository<Security>
   ) {}
 
-  async create(createDTO: CreateSecurityDto) {
-    return this.securitiesRepository.save(createDTO);
+  async create(
+    createDTO: CreateSecurityDto | CreateSecurityDto[]
+  ): Promise<Security | Security[]> {
+    const decodeDto = (dto: CreateSecurityDto) => ({
+      ...dto,
+      name: decodeURIComponent(escape(dto.name)),
+      shortName: decodeURIComponent(escape(dto.shortName)),
+    });
+
+    return Array.isArray(createDTO)
+      ? this.securitiesRepository.save(createDTO.map(decodeDto))
+      : this.securitiesRepository.save(decodeDto(createDTO));
   }
 
   async findAll() {
