@@ -11,7 +11,7 @@ export const CreateSecurityPage = () => {
 
   return (
     <div className="p-3">
-      <h1 className="text-4xl font-extrabold">Create Security</h1>;
+      <h1 className="text-4xl font-extrabold">Create Security</h1>
       <SecurityForm onSubmit={addSecurity} />
     </div>
   );

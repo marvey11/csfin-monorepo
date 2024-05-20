@@ -1,6 +1,6 @@
 import { FormEvent, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SecurityData, securityTypes } from "../types";
+import { SecurityData, SecurityType, securityTypes } from "../types";
 
 interface SecurityFormProps {
   value?: SecurityData;
@@ -27,13 +27,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       (secType) => secType === refSecurityType.current?.value
     );
 
-    onSubmit({
-      isin,
-      nsin,
-      name,
-      shortName,
-      type: securityType ?? "stock",
-    });
+    onSubmit({ isin, nsin, name, shortName, type: securityType ?? "stock" });
 
     navigate("/securities");
   };
@@ -88,7 +82,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       >
         {securityTypes.map((securityType) => (
           <option key={securityType} value={securityType}>
-            {securityType.toUpperCase()}
+            {mapSecurityTypeToLabel[securityType]}
           </option>
         ))}
       </select>
@@ -111,4 +105,9 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       </div>
     </form>
   );
+};
+
+const mapSecurityTypeToLabel: { [K in SecurityType]: string } = {
+  etf: "ETF",
+  stock: "Stock",
 };
