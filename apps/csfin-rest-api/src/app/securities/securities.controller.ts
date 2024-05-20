@@ -16,27 +16,30 @@ export class SecuritiesController {
   constructor(private readonly securitiesService: SecuritiesService) {}
 
   @Post()
-  create(@Body() dto: CreateSecurityDto) {
-    return this.securitiesService.create(dto);
+  async create(@Body() createDto: CreateSecurityDto | CreateSecurityDto[]) {
+    return this.securitiesService
+      .create(createDto)
+      .then((data) => data)
+      .catch((error) => ({ message: error.message }));
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.securitiesService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string) {
+  async findOne(@Param("id") id: string) {
     return this.securitiesService.findOne(id);
   }
 
   @Patch(":id")
-  update(@Param("id") id: string, @Body() dto: UpdateSecurityDto) {
+  async update(@Param("id") id: string, @Body() dto: UpdateSecurityDto) {
     return this.securitiesService.update(id, dto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string) {
+  async remove(@Param("id") id: string) {
     return this.securitiesService.remove(id);
   }
 }
