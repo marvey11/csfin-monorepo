@@ -3,12 +3,12 @@ import useOutletContextData from "../hooks/useOutletContextData";
 import { ExchangeData, ExchangeResponseData } from "../types";
 
 export const EditExchangePage = () => {
-  const { data: exchange, requestData } =
+  const { data: exchange, sendRequest } =
     useOutletContextData<ExchangeResponseData>();
 
   const updateExchange = (data: ExchangeData) => {
     exchange &&
-      requestData({ url: `/exchanges/${exchange.id}`, method: "patch", data });
+      sendRequest({ url: `/exchanges/${exchange.id}`, method: "patch", data });
   };
 
   return (

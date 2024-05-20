@@ -6,10 +6,10 @@ import { ExchangeResponseData, UseGenericContextType } from "../types";
 export const ExchangeLayout = () => {
   const { id } = useParams();
 
-  const { data, requestData } = useAxios<ExchangeResponseData>();
+  const { data, sendRequest } = useAxios<ExchangeResponseData>();
 
   useEffect(() => {
-    id && requestData({ url: `/exchanges/${id}`, method: "get" });
+    id && sendRequest({ url: `/exchanges/${id}`, method: "get" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -19,7 +19,7 @@ export const ExchangeLayout = () => {
       context={
         {
           data,
-          requestData,
+          sendRequest,
         } satisfies UseGenericContextType<ExchangeResponseData>
       }
     />

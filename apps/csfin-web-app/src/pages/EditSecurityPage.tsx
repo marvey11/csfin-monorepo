@@ -3,12 +3,12 @@ import useOutletContextData from "../hooks/useOutletContextData";
 import { SecurityData, SecurityResponseData } from "../types";
 
 export const EditSecurityPage = () => {
-  const { data: security, requestData } =
+  const { data: security, sendRequest } =
     useOutletContextData<SecurityResponseData>();
 
   const updateSecurity = (data: SecurityData) => {
     security &&
-      requestData({ url: `/securities/${security.id}`, method: "patch", data });
+      sendRequest({ url: `/securities/${security.id}`, method: "patch", data });
   };
 
   return (
