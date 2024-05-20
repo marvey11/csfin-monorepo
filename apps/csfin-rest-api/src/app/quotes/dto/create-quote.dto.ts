@@ -1,5 +1,17 @@
-export class CreateQuoteDto {
+class CreateQuoteDto {
   isin: string;
   date: Date;
-  quote: number;
+  price: number;
 }
+
+interface QuoteItem {
+  date: Date;
+  price: number;
+}
+
+class CreateManyQuotesDto {
+  isin: string;
+  quoteItems: QuoteItem[];
+}
+
+export { CreateManyQuotesDto, CreateQuoteDto };

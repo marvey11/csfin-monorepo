@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Security } from "../securities/entities/security.entity";
-import { CreateQuoteDto } from "./dto/create-quote.dto";
+import { CreateManyQuotesDto, CreateQuoteDto } from "./dto/create-quote.dto";
 import { UpdateQuoteDto } from "./dto/update-quote.dto";
 import { Quote } from "./entities/quote.entity";
 
@@ -31,20 +31,33 @@ export class QuotesService {
     @InjectRepository(Quote)
     private quotesRepository: Repository<Quote>,
     @InjectRepository(Security)
-    private securitiesRepository: Repository<Security>,
+    private securitiesRepository: Repository<Security>
   ) {}
 
-  async create(dto: CreateQuoteDto): Promise<Quote> {
-    const { isin, ...rest } = dto;
+  async create(
+    dto: CreateQuoteDto | CreateManyQuotesDto
+  ): Promise<Quote | Quote[]> {
+    const { isin } = dto;
     return this.securitiesRepository
       .findOneByOrFail({ isin: isin })
-      .then((security) => {
-        const quote = this.quotesRepository.create();
-        return this.quotesRepository.save({
-          ...quote,
-          ...rest,
-          security: security,
-        });
+      .then((security): Promise<Quote | Quote[]> => {
+        if ("quoteItems" in dto) {
+          return this.quotesRepository.save(
+            dto.quoteItems.map((quote): Quote => {
+              const priceItem = this.quotesRepository.create();
+              return { ...priceItem, ...quote, security: security };
+            })
+          );
+        } else {
+          const { price, date } = dto;
+          const priceItem = this.quotesRepository.create();
+          return this.quotesRepository.save({
+            ...priceItem,
+            date,
+            price,
+            security: security,
+          });
+        }
       })
       .catch(() => {
         throw { message: `Could not create quote entity for ISIN ${isin}` };
@@ -55,7 +68,7 @@ export class QuotesService {
     const queryBuilder = this.quotesRepository
       .createQueryBuilder("quote")
       .innerJoin("quote.security", "security")
-      .select(["quote.id AS id", "quote.date AS date", "quote.quote AS price"])
+      .select(["quote.id AS id", "quote.date AS date", "quote.price AS price"])
       .addSelect("security.isin", "isin");
 
     if ("isin" in query) {

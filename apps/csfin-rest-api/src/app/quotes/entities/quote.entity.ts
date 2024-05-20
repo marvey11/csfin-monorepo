@@ -10,7 +10,7 @@ export class Quote {
   date: Date;
 
   @Column({ type: "numeric" })
-  quote: number;
+  price: number;
 
   @ManyToOne(() => Security, (security) => security.quotes, {
     onDelete: "CASCADE",
