@@ -1,11 +1,13 @@
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import useExchange from "../hooks/useEchange";
+import useOutletContextData from "../hooks/useOutletContextData";
+import { ExchangeResponseData } from "../types";
 
 export const ExchangeDetailsPage = () => {
   const navigate = useNavigate();
 
-  const { exchange, requestData } = useExchange();
+  const { data: exchange, requestData } =
+    useOutletContextData<ExchangeResponseData>();
 
   const handleDelete = () => {
     if (exchange) {

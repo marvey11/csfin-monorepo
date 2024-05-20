@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import { ExchangeResponseData, UseExchangeContextType } from "../types";
+import { ExchangeResponseData, UseGenericContextType } from "../types";
 
 export const ExchangeLayout = () => {
   const { id } = useParams();
 
-  const { loading, error, data, requestData } =
-    useAxios<ExchangeResponseData>();
+  const { data, requestData } = useAxios<ExchangeResponseData>();
 
   useEffect(() => {
     id && requestData({ url: `/exchanges/${id}`, method: "get" });
@@ -17,7 +16,12 @@ export const ExchangeLayout = () => {
   return (
     // TODO: process loading and error states
     <Outlet
-      context={{ exchange: data, requestData } satisfies UseExchangeContextType}
+      context={
+        {
+          data,
+          requestData,
+        } satisfies UseGenericContextType<ExchangeResponseData>
+      }
     />
   );
 };

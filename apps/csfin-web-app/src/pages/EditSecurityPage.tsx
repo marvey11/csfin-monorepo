@@ -1,9 +1,10 @@
 import { SecurityForm } from "../components";
-import useSecurity from "../hooks/useSecurity";
-import { SecurityData } from "../types";
+import useOutletContextData from "../hooks/useOutletContextData";
+import { SecurityData, SecurityResponseData } from "../types";
 
 export const EditSecurityPage = () => {
-  const { security, requestData } = useSecurity();
+  const { data: security, requestData } =
+    useOutletContextData<SecurityResponseData>();
 
   const updateSecurity = (data: SecurityData) => {
     security &&
