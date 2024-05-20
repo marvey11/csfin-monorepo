@@ -15,15 +15,20 @@ export class SecuritiesService {
   async create(
     createDTO: CreateSecurityDto | CreateSecurityDto[]
   ): Promise<Security | Security[]> {
+    const decodeItem = (item: string | undefined) =>
+      decodeURIComponent(escape(item));
+
     const decodeDto = (dto: CreateSecurityDto) => ({
       ...dto,
-      name: decodeURIComponent(escape(dto.name)),
-      shortName: decodeURIComponent(escape(dto.shortName)),
+      name: decodeItem(dto.name),
+      shortName: decodeItem(dto.shortName),
     });
 
-    return Array.isArray(createDTO)
-      ? this.securitiesRepository.save(createDTO.map(decodeDto))
-      : this.securitiesRepository.save(decodeDto(createDTO));
+    if (Array.isArray(createDTO)) {
+      return this.securitiesRepository.save(createDTO.map(decodeDto));
+    }
+
+    return this.securitiesRepository.save(decodeDto(createDTO));
   }
 
   async findAll() {
@@ -41,7 +46,7 @@ export class SecuritiesService {
     return this.securitiesRepository
       .findOneByOrFail({ id })
       .then((security) => {
-        this.securitiesRepository.save({ ...security, ...updateDTO });
+        return this.securitiesRepository.save({ ...security, ...updateDTO });
       });
   }
 

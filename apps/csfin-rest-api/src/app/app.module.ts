@@ -2,7 +2,9 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { Quote } from "./quotes/entities/quote.entity";
+import { SecuritiesExchange } from "./exchanges/entities/exchange.entity";
+import { ExchangesModule } from "./exchanges/exchanges.module";
+import { QuoteData } from "./quotes/entities/quote.entity";
 import { QuotesModule } from "./quotes/quotes.module";
 import { Security } from "./securities/entities/security.entity";
 import { SecuritiesModule } from "./securities/securities.module";
@@ -16,9 +18,10 @@ import { SecuritiesModule } from "./securities/securities.module";
       username: "codescape",
       password: "password",
       database: "codescape-financial",
-      entities: [Quote, Security],
+      entities: [QuoteData, SecuritiesExchange, Security],
       synchronize: true,
     }),
+    ExchangesModule,
     QuotesModule,
     SecuritiesModule,
   ],

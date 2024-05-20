@@ -1,17 +1,19 @@
-class CreateQuoteDto {
+class CreateQuoteDataDto {
   isin: string;
+  exchangeName: string;
   date: Date;
   price: number;
 }
 
-interface QuoteItem {
+interface QuoteDataItem {
   date: Date;
   price: number;
 }
 
 class CreateManyQuotesDto {
   isin: string;
-  quoteItems: QuoteItem[];
+  exchangeName: string;
+  quoteItems: QuoteDataItem[];
 }
 
-export { CreateManyQuotesDto, CreateQuoteDto };
+export { CreateManyQuotesDto, CreateQuoteDataDto, QuoteDataItem };
