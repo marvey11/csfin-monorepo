@@ -1,6 +1,6 @@
-import { SecurityForm } from "../components";
-import useAxios from "../hooks/useAxios";
-import { SecurityData } from "../types";
+import { SecurityForm } from "../../components";
+import useAxios from "../../hooks/useAxios";
+import { SecurityData } from "../../types";
 
 export const CreateSecurityPage = () => {
   const { sendRequest } = useAxios();
