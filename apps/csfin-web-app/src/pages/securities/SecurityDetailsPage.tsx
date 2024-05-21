@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import useOutletContextData from "../hooks/useOutletContextData";
-import { SecurityResponseData } from "../types";
+import useOutletContextData from "../../hooks/useOutletContextData";
+import { SecurityResponseData } from "../../types";
 
 export const SecurityDetailsPage = () => {
   const navigate = useNavigate();

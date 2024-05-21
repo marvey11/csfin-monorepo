@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import useOutletContextData from "../hooks/useOutletContextData";
-import { ExchangeResponseData } from "../types";
+import useOutletContextData from "../../hooks/useOutletContextData";
+import { ExchangeResponseData } from "../../types";
 
 export const ExchangeDetailsPage = () => {
   const navigate = useNavigate();

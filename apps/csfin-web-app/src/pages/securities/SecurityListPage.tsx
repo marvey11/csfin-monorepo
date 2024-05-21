@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import useAxios from "../hooks/useAxios";
-import { SecurityResponseData, SecurityType } from "../types";
+import useAxios from "../../hooks/useAxios";
+import { SecurityResponseData, SecurityType } from "../../types";
 
 export const SecurityListPage = () => {
   const navigate = useNavigate();

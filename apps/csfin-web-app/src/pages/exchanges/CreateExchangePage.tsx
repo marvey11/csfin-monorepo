@@ -1,6 +1,6 @@
-import { ExchangeForm } from "../components";
-import useAxios from "../hooks/useAxios";
-import { ExchangeData } from "../types";
+import { ExchangeForm } from "../../components";
+import useAxios from "../../hooks/useAxios";
+import { ExchangeData } from "../../types";
 
 export const CreateExchangePage = () => {
   const { sendRequest } = useAxios();
