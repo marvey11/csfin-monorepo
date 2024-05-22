@@ -16,6 +16,7 @@ import {
   ExchangeDetailsPage,
   ExchangeListPage,
   SecurityDetailsPage,
+  SecurityEvaluationPage,
   SecurityListPage,
 } from "./pages";
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="securities">
         <Route index element={<SecurityListPage />} />
         <Route path="create" element={<CreateSecurityPage />} />
+        <Route path="evaluate" element={<SecurityEvaluationPage />} />
         <Route path=":id" element={<SecurityLayout />}>
           <Route index element={<SecurityDetailsPage />} />
           <Route path="edit" element={<EditSecurityPage />} />
