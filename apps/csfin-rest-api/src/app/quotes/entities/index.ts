@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { SecuritiesExchange } from "../../exchanges";
-import { Security } from "../../securities/entities";
+import { Security } from "../../securities";
 
 @Entity()
 @Index(["security.id", "exchange.id", "date"], { unique: true })
