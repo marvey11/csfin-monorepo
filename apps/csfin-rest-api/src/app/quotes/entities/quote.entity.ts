@@ -5,8 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { SecuritiesExchange } from "../../exchanges";
-import { Security } from "../../securities";
+import { SecuritiesExchange } from "../../exchanges/entities/exchange.entity";
+import { Security } from "../../securities/entities/security.entity";
 
 @Entity()
 @Index(["security.id", "exchange.id", "date"], { unique: true })

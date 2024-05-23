@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { QuoteData } from "../../quotes";
+import { QuoteData } from "../../quotes/entities/quote.entity";
 
 @Entity()
 @Index(["isin", "nsin"], { unique: true })

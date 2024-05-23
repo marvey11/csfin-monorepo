@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { SecuritiesExchange } from "./entities";
+import { SecuritiesExchange } from "./entities/exchange.entity";
 import { ExchangesController } from "./exchanges.controller";
 import { ExchangesService } from "./exchanges.service";
 

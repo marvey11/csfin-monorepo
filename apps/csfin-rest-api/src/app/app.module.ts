@@ -1,8 +1,11 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ExchangesModule, SecuritiesExchange } from "./exchanges";
-import { QuoteData, QuotesModule } from "./quotes";
-import { SecuritiesModule, Security } from "./securities";
+import { ExchangesModule } from "./exchanges";
+import { SecuritiesExchange } from "./exchanges/entities/exchange.entity";
+import { QuotesModule } from "./quotes";
+import { QuoteData } from "./quotes/entities/quote.entity";
+import { SecuritiesModule } from "./securities";
+import { Security } from "./securities/entities/security.entity";
 
 @Module({
   imports: [

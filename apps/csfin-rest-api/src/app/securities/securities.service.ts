@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { escape } from "querystring";
 import { Repository } from "typeorm";
-import { Security } from "./entities";
+import { Security } from "./entities/security.entity";
 
 @Injectable()
 export class SecuritiesService {
