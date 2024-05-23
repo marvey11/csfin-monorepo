@@ -1,6 +1,6 @@
+import { ExchangeData, ExchangeResponseData } from "@csfin-monorepo/core";
 import { ExchangeForm } from "../../components";
 import useOutletContextData from "../../hooks/useOutletContextData";
-import { ExchangeData, ExchangeResponseData } from "../../types";
 
 export const EditExchangePage = () => {
   const { data: exchange, sendRequest } =

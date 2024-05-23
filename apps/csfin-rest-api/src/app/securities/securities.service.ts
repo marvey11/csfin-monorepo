@@ -1,9 +1,9 @@
+import { CreateSecurityDto, UpdateSecurityDto } from "@csfin-monorepo/core";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { escape } from "querystring";
 import { Repository } from "typeorm";
-import { CreateSecurityDto, UpdateSecurityDto } from "./dto";
-import { Security } from "./entities/security.entity";
+import { Security } from "./entities";
 
 @Injectable()
 export class SecuritiesService {

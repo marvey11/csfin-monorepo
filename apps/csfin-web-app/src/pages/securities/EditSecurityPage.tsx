@@ -1,6 +1,6 @@
+import { SecurityData, SecurityResponseData } from "@csfin-monorepo/core";
 import { SecurityForm } from "../../components";
 import useOutletContextData from "../../hooks/useOutletContextData";
-import { SecurityData, SecurityResponseData } from "../../types";
 
 export const EditSecurityPage = () => {
   const { data: security, sendRequest } =

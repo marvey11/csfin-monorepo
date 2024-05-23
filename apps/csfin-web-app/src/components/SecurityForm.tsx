@@ -1,6 +1,6 @@
+import { SecurityData, SecurityType } from "@csfin-monorepo/core";
 import { FormEvent, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SecurityData, SecurityType, securityTypes } from "../types";
 
 interface SecurityFormProps {
   value?: SecurityData;
@@ -9,6 +9,8 @@ interface SecurityFormProps {
 
 export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
   const navigate = useNavigate();
+
+  const securityTypes = Object.values(SecurityType);
 
   const refISIN = useRef<HTMLInputElement>(null);
   const refNSIN = useRef<HTMLInputElement>(null);
@@ -27,7 +29,13 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       (secType) => secType === refSecurityType.current?.value
     );
 
-    onSubmit({ isin, nsin, name, shortName, type: securityType ?? "stock" });
+    onSubmit({
+      isin,
+      nsin,
+      name,
+      shortName,
+      type: securityType ?? SecurityType.STOCK,
+    });
 
     navigate("/securities");
   };

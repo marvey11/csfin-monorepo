@@ -1,12 +1,15 @@
-export enum SecurityType {
+enum SecurityType {
   STOCK = "stock",
   ETF = "etf",
 }
 
-export class CreateSecurityDto {
+interface SecurityData {
   isin: string;
   nsin: string;
   name: string;
   shortName?: string;
   type: SecurityType;
 }
+
+export { SecurityType };
+export type { SecurityData };

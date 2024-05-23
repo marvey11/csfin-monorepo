@@ -1,3 +1,4 @@
+import { CreateSecurityDto, UpdateSecurityDto } from "@csfin-monorepo/core";
 import {
   Body,
   Controller,
@@ -7,8 +8,6 @@ import {
   Patch,
   Post,
 } from "@nestjs/common";
-import { CreateSecurityDto } from "./dto/create-security.dto";
-import { UpdateSecurityDto } from "./dto/update-security.dto";
 import { SecuritiesService } from "./securities.service";
 
 @Controller("securities")
@@ -34,8 +33,8 @@ export class SecuritiesController {
   }
 
   @Patch(":id")
-  async update(@Param("id") id: string, @Body() dto: UpdateSecurityDto) {
-    return this.securitiesService.update(id, dto);
+  async update(@Param("id") id: string, @Body() updateDto: UpdateSecurityDto) {
+    return this.securitiesService.update(id, updateDto);
   }
 
   @Delete(":id")

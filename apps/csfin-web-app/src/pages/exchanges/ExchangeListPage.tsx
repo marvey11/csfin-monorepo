@@ -1,7 +1,7 @@
+import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
-import { ExchangeResponseData } from "../../types";
 
 export const ExchangeListPage = () => {
   const navigate = useNavigate();

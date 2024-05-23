@@ -1,27 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { SecuritiesExchange } from "../exchanges/entities/exchange.entity";
-import { Security } from "../securities/entities/security.entity";
 import {
   CreateManyQuotesDto,
   CreateQuoteDataDto,
+  ExchangeResponse,
   QuoteDataItem,
-} from "./dto/create-quote.dto";
-import { UpdateQuoteDto } from "./dto/update-quote.dto";
-import { QuoteData } from "./entities/quote.entity";
+  SingleSecurityQuoteResponse,
+  UpdateQuoteDto,
+} from "@csfin-monorepo/core";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { SecuritiesExchange } from "../exchanges";
+import { Security } from "../securities";
+import { QuoteData } from "./entities";
 
 export type FindAllQueryParams = { limit: number } | { "min-date": Date };
-
-interface SingleSecurityQuoteResponse {
-  isin: string;
-  exchanges: ExchangeResponse[];
-}
-
-interface ExchangeResponse {
-  name: string;
-  quoteData: QuoteData[];
-}
 
 @Injectable()
 export class QuotesService {
@@ -138,7 +130,7 @@ export class QuotesService {
     return this.quotesRepository
       .findOneByOrFail({ id: id })
       .then((quoteData) =>
-        this.quotesRepository.save({ ...quoteData, ...updateDTO })
+        this.quotesRepository.save({ ...quoteData, ...updateDTO } as QuoteData)
       );
   }
 

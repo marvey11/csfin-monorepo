@@ -7,7 +7,8 @@
       "@nx/react/typings/cssmodule.d.ts",
       "@nx/react/typings/image.d.ts",
       "vite/client"
-    ]
+    ],
+    "paths": { "@csfin-monorepo/core": ["libs/core/src/index.ts"] }
   },
   "exclude": [
     "src/**/*.spec.ts",
