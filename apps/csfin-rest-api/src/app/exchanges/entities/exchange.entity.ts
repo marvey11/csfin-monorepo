@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { QuoteData } from "../../quotes";
+import { QuoteData } from "../../quotes/entities/quote.entity";
 
 @Entity()
 export class SecuritiesExchange {

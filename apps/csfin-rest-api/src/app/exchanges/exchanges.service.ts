@@ -2,7 +2,7 @@ import { CreateExchangeDto, UpdateExchangeDto } from "@csfin-monorepo/core";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { SecuritiesExchange } from "./entities";
+import { SecuritiesExchange } from "./entities/exchange.entity";
 
 @Injectable()
 export class ExchangesService {

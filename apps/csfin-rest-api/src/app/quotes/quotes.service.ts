@@ -9,9 +9,9 @@ import {
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { SecuritiesExchange } from "../exchanges";
-import { Security } from "../securities";
-import { QuoteData } from "./entities";
+import { SecuritiesExchange } from "../exchanges/entities/exchange.entity";
+import { Security } from "../securities/entities/security.entity";
+import { QuoteData } from "./entities/quote.entity";
 
 export type FindAllQueryParams = { limit: number } | { "min-date": Date };
 
