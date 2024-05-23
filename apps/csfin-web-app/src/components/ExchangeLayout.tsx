@@ -1,7 +1,8 @@
+import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import { ExchangeResponseData, UseGenericContextType } from "../types";
+import { UseGenericContextType } from "../types";
 
 export const ExchangeLayout = () => {
   const { id } = useParams();

@@ -1,4 +1,9 @@
 import {
+  CreateManyQuotesDto,
+  CreateQuoteDataDto,
+  UpdateQuoteDto,
+} from "@csfin-monorepo/core";
+import {
   Body,
   Controller,
   Delete,
@@ -8,11 +13,6 @@ import {
   Post,
   Query,
 } from "@nestjs/common";
-import {
-  CreateManyQuotesDto,
-  CreateQuoteDataDto,
-} from "./dto/create-quote.dto";
-import { UpdateQuoteDto } from "./dto/update-quote.dto";
 import { FindAllQueryParams, QuotesService } from "./quotes.service";
 
 @Controller("quotes")
@@ -38,11 +38,8 @@ export class QuotesController {
   }
 
   @Patch(":id")
-  async update(
-    @Param("id") id: string,
-    @Body() updateQuoteDto: UpdateQuoteDto
-  ) {
-    return this.quotesService.update(id, updateQuoteDto);
+  async update(@Param("id") id: string, @Body() updateDto: UpdateQuoteDto) {
+    return this.quotesService.update(id, updateDto);
   }
 
   @Delete(":id")

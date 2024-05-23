@@ -1,7 +1,7 @@
+import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
 import { useEffect, useMemo } from "react";
 import { SecurityEvaluationBox } from "../../components";
 import useAxios from "../../hooks/useAxios";
-import { SingleSecurityQuoteResponse } from "../../types";
 import { getEvaluatedQuoteData } from "../../utils";
 
 export const SecurityEvaluationPage = () => {

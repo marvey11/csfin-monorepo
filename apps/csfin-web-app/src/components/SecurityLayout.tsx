@@ -1,7 +1,8 @@
+import { SecurityResponseData } from "@csfin-monorepo/core";
 import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import { SecurityResponseData, UseGenericContextType } from "../types";
+import { UseGenericContextType } from "../types";
 
 export const SecurityLayout = () => {
   const { id } = useParams();

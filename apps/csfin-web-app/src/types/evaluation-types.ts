@@ -1,4 +1,4 @@
-import { QuoteData } from "./quote-types";
+import { QuoteDataItem } from "@csfin-monorepo/core";
 
 interface SecurityEvaluation {
   isin: string;
@@ -7,7 +7,7 @@ interface SecurityEvaluation {
 }
 
 interface EvaluationData {
-  latestQuote: QuoteData;
+  latestQuote: QuoteDataItem;
   sma200: number;
   sma200Previous: number;
   smaComp: number;

@@ -1,3 +1,4 @@
+import { SecurityType } from "@csfin-monorepo/core";
 import {
   Column,
   Entity,
@@ -5,8 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { QuoteData } from "../../quotes/entities/quote.entity";
-import { SecurityType } from "../dto/create-security.dto";
+import { QuoteData } from "../../quotes";
 
 @Entity()
 @Index(["isin", "nsin"], { unique: true })

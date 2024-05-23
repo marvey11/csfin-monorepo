@@ -1,13 +1,8 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { SecuritiesExchange } from "./exchanges/entities/exchange.entity";
-import { ExchangesModule } from "./exchanges/exchanges.module";
-import { QuoteData } from "./quotes/entities/quote.entity";
-import { QuotesModule } from "./quotes/quotes.module";
-import { Security } from "./securities/entities/security.entity";
-import { SecuritiesModule } from "./securities/securities.module";
+import { ExchangesModule, SecuritiesExchange } from "./exchanges";
+import { QuoteData, QuotesModule } from "./quotes";
+import { SecuritiesModule, Security } from "./securities";
 
 @Module({
   imports: [
@@ -25,8 +20,6 @@ import { SecuritiesModule } from "./securities/securities.module";
     QuotesModule,
     SecuritiesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AppModule {}

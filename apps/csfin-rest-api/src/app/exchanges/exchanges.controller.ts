@@ -1,3 +1,4 @@
+import { CreateExchangeDto, UpdateExchangeDto } from "@csfin-monorepo/core";
 import {
   Body,
   Controller,
@@ -7,8 +8,6 @@ import {
   Patch,
   Post,
 } from "@nestjs/common";
-import { CreateExchangeDto } from "./dto/create-exchange.dto";
-import { UpdateExchangeDto } from "./dto/update-exchange.dto";
 import { ExchangesService } from "./exchanges.service";
 
 @Controller("exchanges")
@@ -31,11 +30,8 @@ export class ExchangesController {
   }
 
   @Patch(":id")
-  async update(
-    @Param("id") id: string,
-    @Body() updateExchangeDto: UpdateExchangeDto
-  ) {
-    return this.exchangesService.update(id, updateExchangeDto);
+  async update(@Param("id") id: string, @Body() updateDto: UpdateExchangeDto) {
+    return this.exchangesService.update(id, updateDto);
   }
 
   @Delete(":id")
