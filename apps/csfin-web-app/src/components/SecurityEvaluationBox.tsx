@@ -21,7 +21,6 @@ export const SecurityEvaluationBox = ({
         className="flex flex-row justify-start items-center"
       >
         <span className="mr-4">{exchangeName}</span>
-
         <span className="mr-4">
           Latest:&nbsp;
           <span className="w-24 text-end inline-block">
@@ -31,7 +30,6 @@ export const SecurityEvaluationBox = ({
             ({formatDate("de-DE", latestQuote.date)})
           </span>
         </span>
-
         <span className="mr-4">
           SMA-200:&nbsp;
           <span className="w-20 text-end inline-block">
@@ -52,19 +50,15 @@ export const SecurityEvaluationBox = ({
           </span>
         </span>
 
-        {rslValue && (
-          <span className="mr-4">
-            RSL:&nbsp;
-            <span className="w-20 text-end inline-block font-bold">
-              {formatFixedPrecision("de-DE", rslValue, 4)}
-            </span>
-            {rslDate && (
-              <span className="text-neutral-500 w-20 text-end inline-block italic text-xs">
-                ({formatDate("de-DE", rslDate)})
-              </span>
-            )}
+        <span className="mr-4">
+          RSL:&nbsp;
+          <span className="w-20 text-end inline-block font-bold">
+            {formatFixedPrecision("de-DE", rslValue, 4)}
           </span>
-        )}
+          <span className="text-neutral-500 w-20 text-end inline-block italic text-xs">
+            ({formatDate("de-DE", rslDate)})
+          </span>
+        </span>
       </div>
     </div>
   );
