@@ -10,9 +10,10 @@ export const SecurityEvaluationPage = () => {
   const sortedConvertedData = useMemo(() => {
     if (data) {
       const converted = data
-        .map(({ isin, exchanges }) =>
+        .map(({ isin, securityName, exchanges }) =>
           exchanges.map(({ name, quoteData }) => ({
             isin,
+            securityName,
             exchangeName: name,
             evaluation: getEvaluatedQuoteData(quoteData),
           }))

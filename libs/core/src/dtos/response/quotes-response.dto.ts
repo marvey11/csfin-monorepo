@@ -2,6 +2,7 @@ import { QuoteDataItem } from "../../types";
 
 interface SingleSecurityQuoteResponse {
   isin: string;
+  securityName: string;
   exchanges: ExchangeResponse[];
 }
 
