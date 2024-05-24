@@ -16,11 +16,9 @@ export const SecurityEvaluationBox = ({
       <span className="text-lg whitespace-nowrap overflow-x-clip text-ellipsis">
         {securityName}&nbsp;({isin})
       </span>
-      <div
-        key={`${isin}-${exchangeName}`}
-        className="flex flex-row justify-start items-center"
-      >
+      <div className="flex flex-row justify-start items-center">
         <span className="mr-4">{exchangeName}</span>
+
         <span className="mr-4">
           Latest:&nbsp;
           <span className="w-24 text-end inline-block">
@@ -36,6 +34,7 @@ export const SecurityEvaluationBox = ({
             {formatFixedPrecision("de-DE", sma200, 3)}
           </span>
         </span>
+
         <span className="mr-4">
           <ComparisonIcon
             current={sma200}
@@ -43,6 +42,7 @@ export const SecurityEvaluationBox = ({
             className="w-6"
           />
         </span>
+
         <span className="mr-4">
           SMA&nbsp;Comp:&nbsp;
           <span className="w-20 text-end inline-block font-bold">

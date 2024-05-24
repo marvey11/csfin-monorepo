@@ -14,8 +14,20 @@ type SortColumn = (typeof evaluationSortColumns)[number];
 export const SecurityEvaluationPage = () => {
   const [sortColum, setSortColumn] = useState<SortColumn>("rslValue");
 
-  const { data, sendRequest } = useAxios<SingleSecurityQuoteResponse[]>();
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
+  const { data, sendRequest } = useAxios<SingleSecurityQuoteResponse[]>();
+
+  useEffect(() => {
+    sendRequest({
+      url: "/quotes?limit=201",
+      method: "get",
+      transformResponse: [
+        ...(axios.defaults.transformResponse as AxiosResponseTransformer[]),
+        transformEvaluationData,
+      ],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const compareFn = useCallback(
     (one: SecurityEvaluation, two: SecurityEvaluation) => {
@@ -48,7 +60,7 @@ export const SecurityEvaluationPage = () => {
     [data]
   );
 
-  const sortedConvertedData = useMemo(() => {
+  const sortedData = useMemo(() => {
     if (flattenedEvaluationData == null) {
       return undefined;
     }
@@ -58,17 +70,14 @@ export const SecurityEvaluationPage = () => {
     return temp;
   }, [flattenedEvaluationData, compareFn]);
 
-  useEffect(() => {
-    sendRequest({
-      url: "/quotes?limit=201",
-      method: "get",
-      transformResponse: [
-        ...(axios.defaults.transformResponse as AxiosResponseTransformer[]),
-        transformEvaluationData,
-      ],
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const sortDirectionIcon = useMemo(
+    () =>
+      ({
+        asc: <BarsArrowUpIcon className="w-6" />,
+        desc: <BarsArrowDownIcon className="w-6" />,
+      }[sortDirection]),
+    [sortDirection]
+  );
 
   return (
     <div className="p-3">
@@ -80,6 +89,7 @@ export const SecurityEvaluationPage = () => {
 
         <div className="flex flex-row gap-1">
           <select
+            id="evaluation-page-sort-column-select"
             value={sortColum}
             onChange={(e) => {
               setSortColumn(e.target.value as SortColumn);
@@ -104,18 +114,17 @@ export const SecurityEvaluationPage = () => {
             title="Changes sort direction"
             onClick={toggleSortDirection}
           >
-            {sortDirection === "asc" ? (
-              <BarsArrowUpIcon className="w-6" />
-            ) : (
-              <BarsArrowDownIcon className="w-6" />
-            )}
+            {sortDirectionIcon}
           </button>
         </div>
       </div>
 
       <div className="flex flex-col gap-1">
-        {sortedConvertedData?.map((item) => (
-          <SecurityEvaluationBox key={item.isin} {...item} />
+        {sortedData?.map((item) => (
+          <SecurityEvaluationBox
+            key={`${item.isin}-${item.exchangeName}`}
+            {...item}
+          />
         ))}
       </div>
     </div>
