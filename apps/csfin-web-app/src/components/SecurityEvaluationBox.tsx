@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { SecurityEvaluation } from "../types";
 import { formatCurrency, formatDate, formatFixedPrecision } from "../utils";
 import { ComparisonIcon } from "./ComparisonIcon";
@@ -9,7 +8,8 @@ export const SecurityEvaluationBox = ({
   exchangeName,
   evaluation,
 }: SecurityEvaluation) => {
-  const { latestQuote, sma200, sma200Previous, smaComp } = evaluation;
+  const { latestQuote, sma200, sma200Previous, smaComp, rslDate, rslValue } =
+    evaluation;
 
   return (
     <div className="flex flex-col justify-around border p-2 rounded-md border-blue-500 bg-blue-100">
@@ -47,28 +47,25 @@ export const SecurityEvaluationBox = ({
         </span>
         <span className="mr-4">
           SMA&nbsp;Comp:&nbsp;
-          <span
-            className={twMerge(
-              "w-20 text-end inline-block font-bold",
-              getSMACompColor(smaComp)
-            )}
-          >
+          <span className="w-20 text-end inline-block font-bold">
             {formatFixedPrecision("de-DE", smaComp, 4)}
           </span>
         </span>
+
+        {rslValue && (
+          <span className="mr-4">
+            RSL:&nbsp;
+            <span className="w-20 text-end inline-block font-bold">
+              {formatFixedPrecision("de-DE", rslValue, 4)}
+            </span>
+            {rslDate && (
+              <span className="text-neutral-500 w-20 text-end inline-block italic text-xs">
+                ({formatDate("de-DE", rslDate)})
+              </span>
+            )}
+          </span>
+        )}
       </div>
     </div>
   );
-};
-
-const getSMACompColor = (smaComp: number) => {
-  if (smaComp > 1.05) {
-    return "text-green-500";
-  }
-
-  if (smaComp < 1) {
-    return "text-red-500";
-  }
-
-  return "text-neutral-500";
 };
