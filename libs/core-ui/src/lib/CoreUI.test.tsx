@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
-
-import CoreUi from "./core-ui";
+import { CoreUi } from "./CoreUI";
 
 describe("CoreUi", () => {
   it("should render successfully", () => {
