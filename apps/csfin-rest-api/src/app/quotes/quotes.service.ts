@@ -94,6 +94,7 @@ export class QuotesService {
       .then((exchangeResponses) => ({
         isin: security.isin,
         securityName: security.name,
+        securityType: security.type,
         exchanges: exchangeResponses.filter(
           ({ quoteData }) => quoteData.length > 0
         ),

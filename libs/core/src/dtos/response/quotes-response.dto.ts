@@ -1,8 +1,9 @@
-import { QuoteDataItem } from "../../types";
+import { QuoteDataItem, SecurityType } from "../../types";
 
 interface SingleSecurityQuoteResponse {
   isin: string;
   securityName: string;
+  securityType: SecurityType;
   exchanges: ExchangeResponse[];
 }
 

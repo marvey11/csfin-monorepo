@@ -1,9 +1,13 @@
-import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
+import {
+  SecurityType,
+  SingleSecurityQuoteResponse,
+} from "@csfin-monorepo/core";
 
 const transformEvaluationData = (
   data: {
     isin: string;
     securityName: string;
+    securityType: string;
     exchanges: {
       name: string;
       quoteData: { price: string; date: string }[];
@@ -12,6 +16,7 @@ const transformEvaluationData = (
 ): SingleSecurityQuoteResponse[] =>
   data.map((item) => ({
     ...item,
+    securityType: item.securityType as SecurityType,
     exchanges: item.exchanges.map((exchange) => ({
       ...exchange,
       quoteData: exchange.quoteData.map(({ date, price }) => ({
