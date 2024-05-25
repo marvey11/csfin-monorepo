@@ -1,6 +1,6 @@
 {
   "git.autofetch": true,
-  "git.autofetchPeriod": 900,
+  "git.autofetchPeriod": 600,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
