@@ -12,7 +12,7 @@ const evaluationSortColumns = ["securityName", "smaComp", "rslValue"] as const;
 type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
-  const [sortColum, setSortColumn] = useState<SortColumn>("rslValue");
+  const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { data, sendRequest } = useAxios<SingleSecurityQuoteResponse[]>();
@@ -40,9 +40,9 @@ export const SecurityEvaluationPage = () => {
         rslValue: compare(one.evaluation.rslValue, two.evaluation.rslValue),
         smaComp: compare(one.evaluation.smaComp, two.evaluation.smaComp),
         securityName: compare(one.securityName, two.securityName),
-      }[sortColum];
+      }[sortColumn];
     },
-    [sortColum, sortDirection]
+    [sortColumn, sortDirection]
   );
 
   const flattenedEvaluationData: SecurityEvaluation[] | undefined = useMemo(
@@ -71,14 +71,10 @@ export const SecurityEvaluationPage = () => {
     return temp;
   }, [flattenedEvaluationData, compareFn]);
 
-  const sortDirectionIcon = useMemo(
-    () =>
-      ({
-        asc: <BarsArrowUpIcon className="w-6" />,
-        desc: <BarsArrowDownIcon className="w-6" />,
-      }[sortDirection]),
-    [sortDirection]
-  );
+  const sortDirectionIcon = {
+    asc: <BarsArrowUpIcon className="w-6" />,
+    desc: <BarsArrowDownIcon className="w-6" />,
+  }[sortDirection];
 
   return (
     <div className="p-3">
@@ -88,9 +84,9 @@ export const SecurityEvaluationPage = () => {
           Security Evaluation
         </h1>
 
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-1 items-center h-8 p-0 m-0">
           <select
-            value={sortColum}
+            value={sortColumn}
             onChange={(e) => {
               setSortColumn(e.target.value as SortColumn);
             }}
