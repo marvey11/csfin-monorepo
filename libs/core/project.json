@@ -4,21 +4,5 @@
   "sourceRoot": "libs/core/src",
   "projectType": "library",
   "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "outputPath": "dist/libs/core",
-        "emptyOutDir": true,
-        "main": "libs/core/src/index.ts",
-        "tsConfig": "libs/core/tsconfig.lib.json",
-        "assets": [
-          "libs/core/*.md"
-        ]
-      }
-    }
-  }
+  "targets": {}
 }
