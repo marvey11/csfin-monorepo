@@ -1,4 +1,3 @@
-import { SecurityType } from "@csfin-monorepo/core";
 import { twMerge } from "tailwind-merge";
 import { SecurityEvaluation } from "../types";
 import { formatCurrency, formatDate, formatFixedPrecision } from "../utils";
@@ -22,12 +21,33 @@ export const SecurityEvaluationBox = ({
   return (
     <div
       className={twMerge(
-        "flex flex-row justify-start gap-2 items-center border p-2 rounded-md overflow-x-clip",
-        mapSecurityTypeToColors[securityType]
+        "flex flex-row justify-start gap-2 items-center border p-2 rounded-md shadow-md overflow-x-clip",
+        {
+          etf: "border-green-500 bg-green-100",
+          stock: "border-blue-500 bg-blue-100",
+        }[securityType]
       )}
     >
-      <div className="rounded-md bg-blue-200 border border-blue-500 w-10 h-10 text-center align-middle shadow-md">
-        <span className="leading-10 font-bold text-blue-400">{index + 1}</span>
+      <div
+        className={twMerge(
+          "rounded-md w-8 h-8 text-center align-middle shadow-md",
+          {
+            etf: "bg-green-200 border border-green-300",
+            stock: "bg-blue-200 border border-blue-300",
+          }[securityType]
+        )}
+      >
+        <span
+          className={twMerge(
+            "text-xs leading-8 font-bold",
+            {
+              etf: "text-green-400",
+              stock: "text-blue-400",
+            }[securityType]
+          )}
+        >
+          {index + 1}
+        </span>
       </div>
 
       <div className="flex flex-col justify-around">
@@ -88,9 +108,4 @@ export const SecurityEvaluationBox = ({
       </div>
     </div>
   );
-};
-
-const mapSecurityTypeToColors: { [K in SecurityType]: string } = {
-  etf: "border-green-500 bg-green-100",
-  stock: "border-blue-500 bg-blue-100",
 };
