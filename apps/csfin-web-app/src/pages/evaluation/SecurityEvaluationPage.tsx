@@ -89,12 +89,13 @@ export const SecurityEvaluationPage = () => {
 
         <div className="flex flex-row gap-1">
           <select
-            id="evaluation-page-sort-column-select"
             value={sortColum}
             onChange={(e) => {
               setSortColumn(e.target.value as SortColumn);
             }}
-            className="w-fit border border-neutral-400 px-2 py-1 rounded-md cursor-pointer shadow-md"
+            className="w-fit border border-neutral-400 px-2 py-1 rounded-md cursor-pointer shadow-md outline-none"
+            title="Select sort parameter"
+            id="evaluation-page-sort-column-select"
           >
             {evaluationSortColumns.map((column) => (
               <option key={column} value={column}>
@@ -111,7 +112,7 @@ export const SecurityEvaluationPage = () => {
 
           <button
             className="h-8 p-1 border border-neutral-400 hover:bg-neutral-200 rounded-md shadow-md"
-            title="Changes sort direction"
+            title="Toggle sort direction"
             onClick={toggleSortDirection}
           >
             {sortDirectionIcon}
@@ -120,9 +121,10 @@ export const SecurityEvaluationPage = () => {
       </div>
 
       <div className="flex flex-col gap-1">
-        {sortedData?.map((item) => (
+        {sortedData?.map((item, index) => (
           <SecurityEvaluationBox
             key={`${item.isin}-${item.exchangeName}`}
+            index={index}
             {...item}
           />
         ))}
