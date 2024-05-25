@@ -1,4 +1,5 @@
 import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
+import { Select } from "@csfin-monorepo/core-ui";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -71,6 +72,10 @@ export const SecurityEvaluationPage = () => {
     return temp;
   }, [flattenedEvaluationData, compareFn]);
 
+  const handleSelectionChanged = (value: string) => {
+    setSortColumn(value as SortColumn);
+  };
+
   const sortDirectionIcon = {
     asc: <BarsArrowUpIcon className="w-6" />,
     desc: <BarsArrowDownIcon className="w-6" />,
@@ -84,31 +89,24 @@ export const SecurityEvaluationPage = () => {
           Security Evaluation
         </h1>
 
-        <div className="flex flex-row gap-1 items-center h-8 p-0 m-0">
-          <select
-            value={sortColumn}
-            onChange={(e) => {
-              setSortColumn(e.target.value as SortColumn);
-            }}
-            className="w-fit border border-neutral-400 px-2 py-1 rounded-md cursor-pointer shadow-md outline-none"
-            title="Select sort parameter"
+        <div className="flex flex-row gap-1 items-center p-0 m-0">
+          <Select
             id="evaluation-page-sort-column-select"
-          >
-            {evaluationSortColumns.map((column) => (
-              <option key={column} value={column}>
-                {
-                  {
-                    rslValue: "RSL",
-                    securityName: "Security Name",
-                    smaComp: "SMA Comparison",
-                  }[column]
-                }
-              </option>
-            ))}
-          </select>
+            options={evaluationSortColumns.map((column) => ({
+              value: column,
+              label: {
+                rslValue: "RSL",
+                securityName: "Security Name",
+                smaComp: "SMA Comparison",
+              }[column],
+            }))}
+            value={sortColumn}
+            onChange={handleSelectionChanged}
+            title="Select sort parameter"
+          />
 
           <button
-            className="h-8 p-1 border border-neutral-400 hover:bg-neutral-200 rounded-md shadow-md"
+            className="border border-neutral-400 hover:bg-neutral-200 rounded-md shadow-md p-1"
             title="Toggle sort direction"
             onClick={toggleSortDirection}
           >
