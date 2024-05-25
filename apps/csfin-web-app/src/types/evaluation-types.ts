@@ -1,8 +1,9 @@
-import { QuoteDataItem } from "@csfin-monorepo/core";
+import { QuoteDataItem, SecurityType } from "@csfin-monorepo/core";
 
 interface SecurityEvaluation {
   isin: string;
   securityName: string;
+  securityType: SecurityType;
   exchangeName: string;
   evaluation: EvaluationData;
 }

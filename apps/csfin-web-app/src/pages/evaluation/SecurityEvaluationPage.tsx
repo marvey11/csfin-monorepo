@@ -48,10 +48,11 @@ export const SecurityEvaluationPage = () => {
   const flattenedEvaluationData: SecurityEvaluation[] | undefined = useMemo(
     () =>
       data
-        ?.map(({ isin, securityName, exchanges }) =>
+        ?.map(({ isin, securityName, securityType, exchanges }) =>
           exchanges.map(({ name, quoteData }) => ({
             isin,
             securityName,
+            securityType,
             exchangeName: name,
             evaluation: getEvaluatedQuoteData(quoteData),
           }))

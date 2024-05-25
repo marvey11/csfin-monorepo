@@ -1,3 +1,5 @@
+import { SecurityType } from "@csfin-monorepo/core";
+import { twMerge } from "tailwind-merge";
 import { SecurityEvaluation } from "../types";
 import { formatCurrency, formatDate, formatFixedPrecision } from "../utils";
 import { ComparisonIcon } from "./ComparisonIcon";
@@ -10,6 +12,7 @@ export const SecurityEvaluationBox = ({
   index,
   isin,
   securityName,
+  securityType,
   exchangeName,
   evaluation,
 }: SecurityEvaluationBoxProps & SecurityEvaluation) => {
@@ -17,14 +20,27 @@ export const SecurityEvaluationBox = ({
     evaluation;
 
   return (
-    <div className="flex flex-row justify-start gap-2 items-center border p-2 rounded-md border-blue-500 bg-blue-100">
+    <div
+      className={twMerge(
+        "flex flex-row justify-start gap-2 items-center border p-2 rounded-md overflow-x-clip",
+        mapSecurityTypeToColors[securityType]
+      )}
+    >
       <div className="rounded-md bg-blue-200 border border-blue-500 w-10 h-10 text-center align-middle shadow-md">
         <span className="leading-10 font-bold text-blue-400">{index + 1}</span>
       </div>
+
       <div className="flex flex-col justify-around">
-        <span className="text-lg whitespace-nowrap overflow-x-clip text-ellipsis">
-          {securityName}&nbsp;({isin})
-        </span>
+        {/* Title row */}
+        <div className="flex flex-row justify-start items-center gap-4 overflow-x-clip">
+          <span className="text-lg whitespace-nowrap overflow-x-clip text-ellipsis">
+            {securityName}
+          </span>
+          <span className="text-xs uppercase">{securityType}</span>
+          <span className="text-xs uppercase">{isin}</span>
+        </div>
+
+        {/* Evaluation content */}
         <div className="flex flex-row justify-start items-center">
           <span className="mr-4">{exchangeName}</span>
 
@@ -72,4 +88,9 @@ export const SecurityEvaluationBox = ({
       </div>
     </div>
   );
+};
+
+const mapSecurityTypeToColors: { [K in SecurityType]: string } = {
+  etf: "border-green-500 bg-green-100",
+  stock: "border-blue-500 bg-blue-100",
 };
