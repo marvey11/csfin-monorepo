@@ -1,1 +1,2 @@
-export * from "./lib/core-ui";
+export * from "./components";
+export * from "./types";
