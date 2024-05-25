@@ -9,12 +9,13 @@ interface CheckboxProps extends BasicComponentProps {
   onChange: (checked: boolean) => void;
 }
 
-export const Checkbox = ({
+const Checkbox = ({
   id,
   label,
   size = 4,
   checked,
   onChange,
+  title,
   className,
 }: CheckboxProps) => {
   const handleGroupingChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +24,7 @@ export const Checkbox = ({
 
   return (
     <label
+      title={title}
       className={twMerge(
         "inline-flex gap-1 items-center w-fit whitespace-nowrap",
         className
@@ -39,3 +41,5 @@ export const Checkbox = ({
     </label>
   );
 };
+
+export { Checkbox };

@@ -1,5 +1,6 @@
 interface BasicComponentProps {
   id?: string;
+  title?: string;
   className?: string;
 }
 
