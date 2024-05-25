@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@csfin-monorepo/core": ["libs/core/src/index.ts"]
+      "@csfin-monorepo/core": ["libs/core/src/index.ts"],
+      "@csfin-monorepo/core-ui": ["libs/core-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
