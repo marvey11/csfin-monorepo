@@ -15,14 +15,14 @@ type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
-  const [grouped, setGrouped] = useLocalStorage(
-    "csfin.evaluation.group-by-type",
-    false
-  );
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
     useAxios<SingleSecurityQuoteResponse[]>();
+  const [grouped, setGrouped] = useLocalStorage(
+    "csfin.evaluation.group-by-type",
+    false
+  );
 
   useEffect(() => {
     sendRequest({
