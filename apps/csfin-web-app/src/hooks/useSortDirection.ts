@@ -1,7 +1,7 @@
 import { SortDirection } from "@csfin-monorepo/core";
 import { useState } from "react";
 
-const useSortDirection = (initialDirection?: SortDirection) => {
+export const useSortDirection = (initialDirection?: SortDirection) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>(
     initialDirection ?? "asc"
   );
@@ -12,5 +12,3 @@ const useSortDirection = (initialDirection?: SortDirection) => {
 
   return { sortDirection, toggleSortDirection };
 };
-
-export default useSortDirection;

@@ -1,7 +1,7 @@
 import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
-import useAxios from "../hooks/useAxios";
+import { useAxios } from "../hooks";
 import { UseGenericContextType } from "../types";
 
 export const ExchangeLayout = () => {

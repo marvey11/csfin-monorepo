@@ -1,6 +1,6 @@
 import { ExchangeData } from "@csfin-monorepo/core";
 import { ExchangeForm } from "../../components";
-import useAxios from "../../hooks/useAxios";
+import { useAxios } from "../../hooks";
 
 export const CreateExchangePage = () => {
   const { sendRequest } = useAxios();

@@ -2,7 +2,7 @@ import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { DataPageContainer } from "../../components";
-import useOutletContextData from "../../hooks/useOutletContextData";
+import { useOutletContextData } from "../../hooks";
 
 export const ExchangeDetailsPage = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { SecurityData } from "@csfin-monorepo/core";
 import { SecurityForm } from "../../components";
-import useAxios from "../../hooks/useAxios";
+import { useAxios } from "../../hooks";
 
 export const CreateSecurityPage = () => {
   const { sendRequest } = useAxios();

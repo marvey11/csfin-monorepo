@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorage<T>(
+export const useLocalStorage = <T>(
   key: string,
   defaultValue: T | (() => T)
-) {
+) => {
   const [value, setValue] = useState<T>(() => {
     const jsonValue = localStorage.getItem(key);
     if (jsonValue != null) {
@@ -20,4 +20,4 @@ export default function useLocalStorage<T>(
   }, [key, value]);
 
   return [value, setValue] as [T, typeof setValue];
-}
+};

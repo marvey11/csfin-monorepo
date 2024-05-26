@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 
-const useAxios = <T>() => {
+export const useAxios = <T>() => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState<T>();
@@ -43,5 +43,3 @@ const useAxios = <T>() => {
 
   return { loading, error, data, sendRequest };
 };
-
-export default useAxios;
