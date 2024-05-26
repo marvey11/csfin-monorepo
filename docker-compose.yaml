@@ -5,12 +5,18 @@ services:
     volumes:
       - csfin:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=codescape
-      - POSTGRES_DB=codescape-financial
-      - POSTGRES_PASSWORD=password
+      POSTGRES_USER: codescape
+      POSTGRES_DB: codescape-financial
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
     restart: always
     ports:
       - "5432:5432"
+
+secrets:
+   db_password:
+     file: secrets/postgres-password.txt
 
 volumes:
   csfin:
