@@ -9,6 +9,7 @@ export const SecurityDetailsPage = () => {
 
   const {
     loading,
+    error,
     data: security,
     sendRequest,
   } = useOutletContextData<SecurityResponseData>();
@@ -24,7 +25,7 @@ export const SecurityDetailsPage = () => {
   };
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       {security && (
         <div className="flex flex-row items-center justify-between mb-3 gap-1">
           {/* TODO: change `mr-auto` to `me-auto` in later tailwind versions */}

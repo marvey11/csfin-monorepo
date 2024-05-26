@@ -16,7 +16,7 @@ export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
-  const { loading, data, sendRequest } =
+  const { loading, error, data, sendRequest } =
     useAxios<SingleSecurityQuoteResponse[]>();
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export const SecurityEvaluationPage = () => {
   }[sortDirection];
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       <div className="flex flex-row items-center justify-between mb-3">
         {/* TODO: change `mr-auto` to `me-auto` in later tailwind versions */}
         <h1 className="text-4xl w-full font-extrabold whitespace-nowrap text-ellipsis overflow-x-clip">

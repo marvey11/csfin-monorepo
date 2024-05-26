@@ -7,7 +7,8 @@ import useAxios from "../../hooks/useAxios";
 export const ExchangeListPage = () => {
   const navigate = useNavigate();
 
-  const { loading, data, sendRequest } = useAxios<ExchangeResponseData[]>();
+  const { loading, error, data, sendRequest } =
+    useAxios<ExchangeResponseData[]>();
 
   useEffect(() => {
     sendRequest({ url: "/exchanges", method: "get" });
@@ -15,7 +16,7 @@ export const ExchangeListPage = () => {
   }, []);
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       <span className="flex flex-row items-center justify-between mb-3">
         <h1 className="text-4xl font-extrabold">Exchanges</h1>
         <Link to="/exchanges/create">

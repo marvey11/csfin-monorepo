@@ -5,6 +5,7 @@ import useOutletContextData from "../../hooks/useOutletContextData";
 export const EditExchangePage = () => {
   const {
     loading,
+    error,
     data: exchange,
     sendRequest,
   } = useOutletContextData<ExchangeResponseData>();
@@ -15,7 +16,7 @@ export const EditExchangePage = () => {
   };
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       <h1 className="text-4xl font-extrabold">Create Exchange</h1>;
       {exchange && <ExchangeForm value={exchange} onSubmit={updateExchange} />}
     </DataPageContainer>

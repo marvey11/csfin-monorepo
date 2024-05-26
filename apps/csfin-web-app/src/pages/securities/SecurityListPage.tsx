@@ -8,7 +8,8 @@ import useAxios from "../../hooks/useAxios";
 export const SecurityListPage = () => {
   const navigate = useNavigate();
 
-  const { loading, data, sendRequest } = useAxios<SecurityResponseData[]>();
+  const { loading, error, data, sendRequest } =
+    useAxios<SecurityResponseData[]>();
 
   useEffect(() => {
     sendRequest({ url: "/securities", method: "get" });
@@ -16,7 +17,7 @@ export const SecurityListPage = () => {
   }, []);
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       <span className="flex flex-row items-center justify-between mb-3">
         <h1 className="text-4xl font-extrabold">Securities</h1>
         <Link to="/securities/create">
