@@ -4,9 +4,7 @@ import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DataPageContainer, SecurityEvaluationBox } from "../../components";
-import useAxios from "../../hooks/useAxios";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useSortDirection from "../../hooks/useSortDirection";
+import { useAxios, useLocalStorage, useSortDirection } from "../../hooks";
 import { SecurityEvaluation } from "../../types";
 import { getEvaluatedQuoteData, transformEvaluationData } from "../../utils";
 

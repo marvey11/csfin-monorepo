@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { DataPageContainer } from "../../components";
-import useAxios from "../../hooks/useAxios";
+import { useAxios } from "../../hooks";
 
 export const SecurityListPage = () => {
   const navigate = useNavigate();

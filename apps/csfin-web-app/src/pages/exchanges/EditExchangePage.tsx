@@ -1,6 +1,6 @@
 import { ExchangeData, ExchangeResponseData } from "@csfin-monorepo/core";
 import { DataPageContainer, ExchangeForm } from "../../components";
-import useOutletContextData from "../../hooks/useOutletContextData";
+import { useOutletContextData } from "../../hooks";
 
 export const EditExchangePage = () => {
   const {
