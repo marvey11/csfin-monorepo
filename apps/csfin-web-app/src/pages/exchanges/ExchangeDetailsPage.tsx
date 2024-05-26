@@ -9,6 +9,7 @@ export const ExchangeDetailsPage = () => {
 
   const {
     loading,
+    error,
     data: exchange,
     sendRequest,
   } = useOutletContextData<ExchangeResponseData>();
@@ -24,7 +25,7 @@ export const ExchangeDetailsPage = () => {
   };
 
   return (
-    <DataPageContainer isLoading={loading}>
+    <DataPageContainer isLoading={loading} error={error}>
       {exchange && (
         <div className="flex flex-row items-center justify-between mb-3 gap-1">
           {/* TODO: change `mr-auto` to `me-auto` in later tailwind versions */}
