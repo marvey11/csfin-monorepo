@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Spinner } from "./Spinner";
 
 interface DataPageContainerProps {
   isLoading: boolean;
@@ -11,7 +12,7 @@ export const DataPageContainer = ({
 }: DataPageContainerProps) => {
   return isLoading ? (
     <div className="flex h-[calc(100vh-var(--navbar-height))] items-center justify-center">
-      <span>Loading...</span>
+      <Spinner />
     </div>
   ) : (
     <div className="p-3">{children}</div>
