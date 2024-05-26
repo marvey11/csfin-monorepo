@@ -10,20 +10,13 @@ interface NavigationLinkProps {
 export const NavigationLink = ({ to, children }: NavigationLinkProps) => {
   const location = useLocation();
 
-<<<<<<< HEAD
   const isActive = location.pathname === to;
 
-=======
->>>>>>> d124524 (feat: add simple navigation)
   return (
     <NavLink
       to={to}
       className={cn("hover:bg-slate-500 flex items-center h-full px-3", {
-<<<<<<< HEAD
         "bg-slate-700": isActive,
-=======
-        "bg-slate-700": location.pathname === to,
->>>>>>> d124524 (feat: add simple navigation)
       })}
     >
       {children}
