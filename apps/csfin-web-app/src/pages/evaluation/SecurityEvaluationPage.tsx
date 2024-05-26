@@ -1,5 +1,5 @@
 import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
-import { Select } from "@csfin-monorepo/core-ui";
+import { Checkbox, Select } from "@csfin-monorepo/core-ui";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -14,6 +14,7 @@ type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
+  const [grouped, setGrouped] = useState(false);
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
@@ -33,18 +34,35 @@ export const SecurityEvaluationPage = () => {
 
   const compareFn = useCallback(
     (one: SecurityEvaluation, two: SecurityEvaluation) => {
+      const primitiveCompare = <T extends string | number>(a: T, b: T) => {
+        if (typeof a === "string" && typeof b === "string") {
+          return a.localeCompare(b);
+        }
+        return a > b ? 1 : -1;
+      };
+
       const compare = <T extends string | number>(a: T, b: T) => {
         if (a === b) return 0;
-        return (a > b ? 1 : -1) * (sortDirection === "asc" ? 1 : -1);
+        return primitiveCompare(a, b) * (sortDirection === "asc" ? 1 : -1);
+      };
+
+      const fullCompare = <T extends string | number>(a: T, b: T) => {
+        if (grouped) {
+          if (one.securityType === two.securityType) {
+            return compare(a, b);
+          }
+          return one.securityType > two.securityType ? 1 : -1;
+        }
+        return compare(a, b);
       };
 
       return {
-        rslValue: compare(one.evaluation.rslValue, two.evaluation.rslValue),
-        smaComp: compare(one.evaluation.smaComp, two.evaluation.smaComp),
-        securityName: compare(one.securityName, two.securityName),
+        rslValue: fullCompare(one.evaluation.rslValue, two.evaluation.rslValue),
+        smaComp: fullCompare(one.evaluation.smaComp, two.evaluation.smaComp),
+        securityName: fullCompare(one.securityName, two.securityName),
       }[sortColumn];
     },
-    [sortColumn, sortDirection]
+    [grouped, sortColumn, sortDirection]
   );
 
   const flattenedEvaluationData: SecurityEvaluation[] | undefined = useMemo(
@@ -89,6 +107,15 @@ export const SecurityEvaluationPage = () => {
         <h1 className="text-4xl w-full font-extrabold whitespace-nowrap text-ellipsis overflow-x-clip">
           Security Evaluation
         </h1>
+
+        <Checkbox
+          id="group-by-type-checkbox"
+          label="Group securities by type"
+          size={5}
+          checked={grouped}
+          onChange={setGrouped}
+          className="mr-2"
+        />
 
         <div className="flex flex-row gap-1 items-center p-0 m-0">
           <Select
