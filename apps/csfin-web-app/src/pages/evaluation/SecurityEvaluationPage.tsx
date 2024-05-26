@@ -1,5 +1,5 @@
 import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
-import { Select } from "@csfin-monorepo/core-ui";
+import { Checkbox, Select } from "@csfin-monorepo/core-ui";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -14,6 +14,7 @@ type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
+  const [grouped, setGrouped] = useState(false);
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
@@ -89,6 +90,15 @@ export const SecurityEvaluationPage = () => {
         <h1 className="text-4xl w-full font-extrabold whitespace-nowrap text-ellipsis overflow-x-clip">
           Security Evaluation
         </h1>
+
+        <Checkbox
+          id="group-by-type-checkbox"
+          label="Group securities by type"
+          size={5}
+          checked={grouped}
+          onChange={setGrouped}
+          className="mr-2"
+        />
 
         <div className="flex flex-row gap-1 items-center p-0 m-0">
           <Select
