@@ -1,6 +1,7 @@
 {
   "git.autofetch": true,
   "git.autofetchPeriod": 600,
+  "files.associations": { "*.css": "tailwindcss" },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
