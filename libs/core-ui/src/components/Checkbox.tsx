@@ -30,12 +30,20 @@ const Checkbox = ({
         className
       )}
     >
+      {/* for some reason the h- and w- Tailwind values in the input's class
+      names using the provided size disappear after restarting the dev server;
+      using style instead */}
+
       <input
         id={id}
         type="checkbox"
         checked={checked}
         onChange={handleGroupingChanged}
-        className={twMerge("align-middle", `w-${size} h-${size}`)}
+        className="align-middle"
+        style={{
+          height: `calc(${size / 4}rem)`,
+          width: `calc(${size / 4}rem)`,
+        }}
       />
       <span className="align-middle">{label}</span>
     </label>
