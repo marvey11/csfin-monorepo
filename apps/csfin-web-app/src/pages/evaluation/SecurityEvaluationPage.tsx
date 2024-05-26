@@ -5,6 +5,7 @@ import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DataPageContainer, SecurityEvaluationBox } from "../../components";
 import useAxios from "../../hooks/useAxios";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import useSortDirection from "../../hooks/useSortDirection";
 import { SecurityEvaluation } from "../../types";
 import { getEvaluatedQuoteData, transformEvaluationData } from "../../utils";
@@ -14,11 +15,14 @@ type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
-  const [grouped, setGrouped] = useState(false);
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
     useAxios<SingleSecurityQuoteResponse[]>();
+  const [grouped, setGrouped] = useLocalStorage(
+    "csfin.evaluation.group-by-type",
+    false
+  );
 
   useEffect(() => {
     sendRequest({
