@@ -3,7 +3,7 @@ import { Select } from "@csfin-monorepo/core-ui";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SecurityEvaluationBox } from "../../components";
+import { DataPageContainer, SecurityEvaluationBox } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import useSortDirection from "../../hooks/useSortDirection";
 import { SecurityEvaluation } from "../../types";
@@ -16,7 +16,8 @@ export const SecurityEvaluationPage = () => {
   const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
-  const { data, sendRequest } = useAxios<SingleSecurityQuoteResponse[]>();
+  const { loading, data, sendRequest } =
+    useAxios<SingleSecurityQuoteResponse[]>();
 
   useEffect(() => {
     sendRequest({
@@ -82,7 +83,7 @@ export const SecurityEvaluationPage = () => {
   }[sortDirection];
 
   return (
-    <div className="p-3">
+    <DataPageContainer isLoading={loading}>
       <div className="flex flex-row items-center justify-between mb-3">
         {/* TODO: change `mr-auto` to `me-auto` in later tailwind versions */}
         <h1 className="text-4xl w-full font-extrabold whitespace-nowrap text-ellipsis overflow-x-clip">
@@ -124,6 +125,6 @@ export const SecurityEvaluationPage = () => {
           />
         ))}
       </div>
-    </div>
+    </DataPageContainer>
   );
 };

@@ -1,12 +1,13 @@
 import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { DataPageContainer } from "../../components";
 import useAxios from "../../hooks/useAxios";
 
 export const ExchangeListPage = () => {
   const navigate = useNavigate();
 
-  const { data, sendRequest } = useAxios<ExchangeResponseData[]>();
+  const { loading, data, sendRequest } = useAxios<ExchangeResponseData[]>();
 
   useEffect(() => {
     sendRequest({ url: "/exchanges", method: "get" });
@@ -14,7 +15,7 @@ export const ExchangeListPage = () => {
   }, []);
 
   return (
-    <div className="p-3">
+    <DataPageContainer isLoading={loading}>
       <span className="flex flex-row items-center justify-between mb-3">
         <h1 className="text-4xl font-extrabold">Exchanges</h1>
         <Link to="/exchanges/create">
@@ -43,6 +44,6 @@ export const ExchangeListPage = () => {
             </div>
           ))}
       </div>
-    </div>
+    </DataPageContainer>
   );
 };
