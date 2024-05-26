@@ -34,18 +34,35 @@ export const SecurityEvaluationPage = () => {
 
   const compareFn = useCallback(
     (one: SecurityEvaluation, two: SecurityEvaluation) => {
+      const primitiveCompare = <T extends string | number>(a: T, b: T) => {
+        if (typeof a === "string" && typeof b === "string") {
+          return a.localeCompare(b);
+        }
+        return a > b ? 1 : -1;
+      };
+
       const compare = <T extends string | number>(a: T, b: T) => {
         if (a === b) return 0;
-        return (a > b ? 1 : -1) * (sortDirection === "asc" ? 1 : -1);
+        return primitiveCompare(a, b) * (sortDirection === "asc" ? 1 : -1);
+      };
+
+      const fullCompare = <T extends string | number>(a: T, b: T) => {
+        if (grouped) {
+          if (one.securityType === two.securityType) {
+            return compare(a, b);
+          }
+          return one.securityType > two.securityType ? 1 : -1;
+        }
+        return compare(a, b);
       };
 
       return {
-        rslValue: compare(one.evaluation.rslValue, two.evaluation.rslValue),
-        smaComp: compare(one.evaluation.smaComp, two.evaluation.smaComp),
-        securityName: compare(one.securityName, two.securityName),
+        rslValue: fullCompare(one.evaluation.rslValue, two.evaluation.rslValue),
+        smaComp: fullCompare(one.evaluation.smaComp, two.evaluation.smaComp),
+        securityName: fullCompare(one.securityName, two.securityName),
       }[sortColumn];
     },
-    [sortColumn, sortDirection]
+    [grouped, sortColumn, sortDirection]
   );
 
   const flattenedEvaluationData: SecurityEvaluation[] | undefined = useMemo(
