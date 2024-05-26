@@ -7,7 +7,8 @@ import { UseGenericContextType } from "../types";
 export const SecurityLayout = () => {
   const { id } = useParams();
 
-  const { data, sendRequest } = useAxios<SecurityResponseData>();
+  const { loading, error, data, sendRequest } =
+    useAxios<SecurityResponseData>();
 
   useEffect(() => {
     id && sendRequest({ url: `/securities/${id}`, method: "get" });
@@ -15,10 +16,11 @@ export const SecurityLayout = () => {
   }, [id]);
 
   return (
-    // TODO: process loading and error states
     <Outlet
       context={
         {
+          loading,
+          error,
           data,
           sendRequest,
         } satisfies UseGenericContextType<SecurityResponseData>

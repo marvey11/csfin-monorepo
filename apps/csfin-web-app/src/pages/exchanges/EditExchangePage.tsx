@@ -1,10 +1,13 @@
 import { ExchangeData, ExchangeResponseData } from "@csfin-monorepo/core";
-import { ExchangeForm } from "../../components";
+import { DataPageContainer, ExchangeForm } from "../../components";
 import useOutletContextData from "../../hooks/useOutletContextData";
 
 export const EditExchangePage = () => {
-  const { data: exchange, sendRequest } =
-    useOutletContextData<ExchangeResponseData>();
+  const {
+    loading,
+    data: exchange,
+    sendRequest,
+  } = useOutletContextData<ExchangeResponseData>();
 
   const updateExchange = (data: ExchangeData) => {
     exchange &&
@@ -12,9 +15,9 @@ export const EditExchangePage = () => {
   };
 
   return (
-    <div className="p-3">
+    <DataPageContainer isLoading={loading}>
       <h1 className="text-4xl font-extrabold">Create Exchange</h1>;
       {exchange && <ExchangeForm value={exchange} onSubmit={updateExchange} />}
-    </div>
+    </DataPageContainer>
   );
 };

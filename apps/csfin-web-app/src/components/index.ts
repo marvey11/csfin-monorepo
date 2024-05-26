@@ -1,3 +1,4 @@
+export { DataPageContainer } from "./DataPageContainer";
 export { ExchangeForm } from "./ExchangeForm";
 export { ExchangeLayout } from "./ExchangeLayout";
 export { Navigation } from "./Navigation";

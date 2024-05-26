@@ -7,7 +7,8 @@ import { UseGenericContextType } from "../types";
 export const ExchangeLayout = () => {
   const { id } = useParams();
 
-  const { data, sendRequest } = useAxios<ExchangeResponseData>();
+  const { loading, error, data, sendRequest } =
+    useAxios<ExchangeResponseData>();
 
   useEffect(() => {
     id && sendRequest({ url: `/exchanges/${id}`, method: "get" });
@@ -15,10 +16,11 @@ export const ExchangeLayout = () => {
   }, [id]);
 
   return (
-    // TODO: process loading and error states
     <Outlet
       context={
         {
+          loading,
+          error,
           data,
           sendRequest,
         } satisfies UseGenericContextType<ExchangeResponseData>

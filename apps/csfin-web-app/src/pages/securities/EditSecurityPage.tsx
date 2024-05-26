@@ -1,10 +1,13 @@
 import { SecurityData, SecurityResponseData } from "@csfin-monorepo/core";
-import { SecurityForm } from "../../components";
+import { DataPageContainer, SecurityForm } from "../../components";
 import useOutletContextData from "../../hooks/useOutletContextData";
 
 export const EditSecurityPage = () => {
-  const { data: security, sendRequest } =
-    useOutletContextData<SecurityResponseData>();
+  const {
+    loading,
+    data: security,
+    sendRequest,
+  } = useOutletContextData<SecurityResponseData>();
 
   const updateSecurity = (data: SecurityData) => {
     security &&
@@ -12,9 +15,9 @@ export const EditSecurityPage = () => {
   };
 
   return (
-    <div className="p-3">
+    <DataPageContainer isLoading={loading}>
       <h1 className="text-4xl font-extrabold">Create Security</h1>;
       {security && <SecurityForm value={security} onSubmit={updateSecurity} />}
-    </div>
+    </DataPageContainer>
   );
 };

@@ -1,13 +1,17 @@
 import { ExchangeResponseData } from "@csfin-monorepo/core";
 import { AxiosRequestConfig } from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { DataPageContainer } from "../../components";
 import useOutletContextData from "../../hooks/useOutletContextData";
 
 export const ExchangeDetailsPage = () => {
   const navigate = useNavigate();
 
-  const { data: exchange, sendRequest } =
-    useOutletContextData<ExchangeResponseData>();
+  const {
+    loading,
+    data: exchange,
+    sendRequest,
+  } = useOutletContextData<ExchangeResponseData>();
 
   const handleDelete = () => {
     if (exchange) {
@@ -20,7 +24,7 @@ export const ExchangeDetailsPage = () => {
   };
 
   return (
-    <div className="p-3">
+    <DataPageContainer isLoading={loading}>
       {exchange && (
         <div className="flex flex-row items-center justify-between mb-3 gap-1">
           {/* TODO: change `mr-auto` to `me-auto` in later tailwind versions */}
@@ -45,6 +49,6 @@ export const ExchangeDetailsPage = () => {
           </button>
         </div>
       )}
-    </div>
+    </DataPageContainer>
   );
 };
