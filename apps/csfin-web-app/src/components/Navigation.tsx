@@ -7,13 +7,16 @@ export const Navigation = () => {
 
       <ul className="p-0 m-0 list-none flex">
         <li>
+          <NavigationLink to="/portfolios">Portfolios</NavigationLink>
+        </li>
+        <li>
+          <NavigationLink to="/securities/evaluate">Evaluation</NavigationLink>
+        </li>
+        <li>
           <NavigationLink to="/securities">Securities</NavigationLink>
         </li>
         <li>
           <NavigationLink to="/exchanges">Exchanges</NavigationLink>
-        </li>
-        <li>
-          <NavigationLink to="/securities/evaluate">Evaluation</NavigationLink>
         </li>
       </ul>
     </nav>
