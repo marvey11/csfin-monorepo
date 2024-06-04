@@ -15,8 +15,7 @@ export const SecurityEvaluationBox = ({
   exchangeName,
   evaluation,
 }: SecurityEvaluationBoxProps & SecurityEvaluation) => {
-  const { latestQuote, sma200, sma200Previous, smaComp, rslDate, rslValue } =
-    evaluation;
+  const { latestQuote, sma200, sma200Previous, smaComp, rslValue } = evaluation;
 
   return (
     <div
@@ -60,7 +59,7 @@ export const SecurityEvaluationBox = ({
           <span className="text-xs uppercase">{isin}</span>
         </div>
 
-        {/* Evaluation content */}
+        {/* Evaluation content row */}
         <div className="flex flex-row justify-start items-center">
           <span className="mr-4">{exchangeName}</span>
 
@@ -90,18 +89,15 @@ export const SecurityEvaluationBox = ({
 
           <span className="mr-4">
             SMA&nbsp;Comp:&nbsp;
-            <span className="w-20 text-end inline-block font-bold">
+            <span className="w-16 text-end inline-block font-bold">
               {formatFixedPrecision("de-DE", smaComp, 4)}
             </span>
           </span>
 
           <span className="mr-4">
             RSL:&nbsp;
-            <span className="w-20 text-end inline-block font-bold">
+            <span className="w-16 text-end inline-block font-bold">
               {formatFixedPrecision("de-DE", rslValue, 4)}
-            </span>
-            <span className="text-neutral-500 w-20 text-end inline-block italic text-xs">
-              ({formatDate("de-DE", rslDate)})
             </span>
           </span>
         </div>
