@@ -15,7 +15,6 @@ interface EvaluationData {
   sma200Previous: number;
   smaComp: number;
 
-  rslDate: Date;
   rslValue: number;
 }
 
