@@ -26,7 +26,7 @@ const getEvaluatedQuoteData = (data: QuoteDataItem[]): EvaluationData => {
   const calculateRSL = () => {
     const latest = latestQuote.date;
     const refFriday = new Date(latest);
-    refFriday.setDate(latest.getDate() - ((latest.getDay() + 2) % 7));
+    refFriday.setDate(latest.getDate() + ((5 - latest.getDay()) % 7));
 
     const weekArray: QuoteDataItem[] = [];
 
@@ -41,12 +41,12 @@ const getEvaluatedQuoteData = (data: QuoteDataItem[]): EvaluationData => {
     }
 
     weekArray.sort((a, b) => (a.date < b.date ? 1 : -1));
-    const { date, price } = weekArray[0];
+    const { price } = weekArray[0];
     const rslValue =
       (price * weekArray.length) /
       weekArray.reduce((sum, curr) => sum + curr.price, 0);
 
-    return { rslDate: date, rslValue };
+    return { rslValue };
   };
 
   return { latestQuote, ...calculateSMA200(), ...calculateRSL() };
