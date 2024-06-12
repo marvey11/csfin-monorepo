@@ -100,6 +100,17 @@ export const SecurityEvaluationBox = ({
               {formatFixedPrecision("de-DE", rslValue, 4)}
             </span>
           </span>
+
+          <span className="mr-4">
+            Weighted:&nbsp;
+            <span className="w-16 text-end inline-block font-bold">
+              {formatFixedPrecision(
+                "de-DE",
+                (2 * rslValue + 3 * smaComp) / (2 + 3),
+                4
+              )}
+            </span>
+          </span>
         </div>
       </div>
     </div>

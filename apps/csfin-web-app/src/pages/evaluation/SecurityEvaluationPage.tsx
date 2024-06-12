@@ -5,18 +5,24 @@ import axios, { AxiosResponseTransformer } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DataPageContainer, SecurityEvaluationBox } from "../../components";
 import { useAxios, useLocalStorage, useSortDirection } from "../../hooks";
-import { SecurityEvaluation } from "../../types";
+import { EvaluationData, SecurityEvaluation } from "../../types";
 import { getEvaluatedQuoteData, transformEvaluationData } from "../../utils";
 
-const evaluationSortColumns = ["securityName", "smaComp", "rslValue"] as const;
+const evaluationSortColumns = [
+  "securityName",
+  "smaComp",
+  "rslValue",
+  "weighted",
+] as const;
 type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
-  const [sortColumn, setSortColumn] = useState<SortColumn>("rslValue");
+  const [sortColumn, setSortColumn] = useState<SortColumn>("weighted");
 
   const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
     useAxios<SingleSecurityQuoteResponse[]>();
+
   const [grouped, setGrouped] = useLocalStorage(
     "csfin.evaluation.group-by-type",
     false
@@ -58,10 +64,17 @@ export const SecurityEvaluationPage = () => {
         return compare(a, b);
       };
 
+      const weightedEval = (evalData: EvaluationData) =>
+        (2 * evalData.rslValue + 3 * evalData.smaComp) / (2 + 3);
+
       return {
         rslValue: fullCompare(one.evaluation.rslValue, two.evaluation.rslValue),
         smaComp: fullCompare(one.evaluation.smaComp, two.evaluation.smaComp),
         securityName: fullCompare(one.securityName, two.securityName),
+        weighted: fullCompare(
+          weightedEval(one.evaluation),
+          weightedEval(two.evaluation)
+        ),
       }[sortColumn];
     },
     [grouped, sortColumn, sortDirection]
@@ -128,6 +141,7 @@ export const SecurityEvaluationPage = () => {
                 rslValue: "RSL",
                 securityName: "Security Name",
                 smaComp: "SMA Comparison",
+                weighted: "Weighted Comparison",
               }[column],
             }))}
             value={sortColumn}
