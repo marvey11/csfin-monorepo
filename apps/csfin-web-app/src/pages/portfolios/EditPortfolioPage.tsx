@@ -22,7 +22,7 @@ export const EditPortfolioPage = () => {
 
   return (
     <DataPageContainer isLoading={loading} error={error}>
-      <h1 className="text-4xl font-extrabold">Create Portfolio</h1>;
+      <h1 className="text-4xl font-extrabold">Create Portfolio</h1>
       {portfolio && (
         <PortfolioForm value={portfolio} onSubmit={updatePortfolio} />
       )}
