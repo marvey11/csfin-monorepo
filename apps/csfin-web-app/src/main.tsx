@@ -8,13 +8,18 @@ import {
 } from "react-router-dom";
 import App from "./app/App";
 import { ExchangeLayout, SecurityLayout } from "./components";
+import { PortfolioLayout } from "./components/PortfolioLayout";
 import {
   CreateExchangePage,
+  CreatePortfolioPage,
   CreateSecurityPage,
   EditExchangePage,
+  EditPortfolioPage,
   EditSecurityPage,
   ExchangeDetailsPage,
   ExchangeListPage,
+  PortfolioDetailsPage,
+  PortfolioListPage,
   SecurityDetailsPage,
   SecurityEvaluationPage,
   SecurityListPage,
@@ -23,6 +28,15 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      <Route path="portfolios">
+        <Route index element={<PortfolioListPage />} />
+        <Route path="create" element={<CreatePortfolioPage />} />
+        <Route path=":id" element={<PortfolioLayout />}>
+          <Route index element={<PortfolioDetailsPage />} />
+          <Route path="edit" element={<EditPortfolioPage />} />
+        </Route>
+      </Route>
+
       <Route path="securities">
         <Route index element={<SecurityListPage />} />
         <Route path="create" element={<CreateSecurityPage />} />

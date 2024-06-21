@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { QuoteData } from "../../quotes/entities/quote.entity";
+import { SecurityTransaction } from "../../transactions/entities/transaction.entity";
 
 @Entity()
 @Index(["isin", "nsin"], { unique: true })
@@ -31,4 +32,7 @@ export class Security {
 
   @OneToMany(() => QuoteData, (quote) => quote.security)
   quotes: QuoteData[];
+
+  @OneToMany(() => SecurityTransaction, (transaction) => transaction.security)
+  transactions: SecurityTransaction[];
 }
