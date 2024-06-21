@@ -1,10 +1,13 @@
-import { SingleSecurityQuoteResponse } from "@csfin-monorepo/core";
+import {
+  SingleSecurityQuoteResponse,
+  SortDirection,
+} from "@csfin-monorepo/core";
 import { Checkbox, Select } from "@csfin-monorepo/core-ui";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/16/solid";
 import axios, { AxiosResponseTransformer } from "axios";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { DataPageContainer, SecurityEvaluationBox } from "../../components";
-import { useAxios, useLocalStorage, useSortDirection } from "../../hooks";
+import { useAxios, useLocalStorage } from "../../hooks";
 import { EvaluationData, SecurityEvaluation } from "../../types";
 import { getEvaluatedQuoteData, transformEvaluationData } from "../../utils";
 
@@ -17,16 +20,25 @@ const evaluationSortColumns = [
 type SortColumn = (typeof evaluationSortColumns)[number];
 
 export const SecurityEvaluationPage = () => {
-  const [sortColumn, setSortColumn] = useState<SortColumn>("weighted");
-
-  const { sortDirection, toggleSortDirection } = useSortDirection("desc");
   const { loading, error, data, sendRequest } =
     useAxios<SingleSecurityQuoteResponse[]>();
 
+  const [sortColumn, setSortColumn] = useLocalStorage<SortColumn>(
+    "csfin.evaluation.sort-column",
+    "securityName"
+  );
+  const [sortDirection, setSortDirection] = useLocalStorage<SortDirection>(
+    "csfin.evaluation.sort-direction",
+    "desc"
+  );
   const [grouped, setGrouped] = useLocalStorage(
     "csfin.evaluation.group-by-type",
     false
   );
+
+  const toggleSortDirection = () => {
+    setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
+  };
 
   useEffect(() => {
     sendRequest({
