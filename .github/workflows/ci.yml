@@ -35,3 +35,5 @@ jobs:
 
       # Runs lint, test, and build targets for affected projects in parallel
       - run: npx nx affected -t lint test build --parallel=3
+        env:
+          NX_DAEMON: false
