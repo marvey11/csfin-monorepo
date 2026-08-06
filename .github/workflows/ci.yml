@@ -34,6 +34,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       # Runs lint, test, and build targets for affected projects in parallel
-      - run: npx nx affected -t lint test build --parallel=3
+      - run: npx nx affected -t lint test build --parallel=3 --verbose
         env:
           NX_DAEMON: false
