@@ -12,8 +12,9 @@ module.exports = composePlugins(
     outputHashing: 'none',
   }),
   (config) => {
+    // Override output path safely after withNx resolves defaults
     config.output = {
-      ...config.output,
+      ...(config.output || {}),
       path: join(__dirname, '../../dist/apps/csfin-rest-api'),
     };
     return config;
