@@ -7,7 +7,7 @@ module.exports = composePlugins(
     compiler: 'tsc',
     main: './src/main.ts',
     tsConfig: './tsconfig.app.json',
-    assets: ['./src/assets'],
+    assets: ['./apps/csfin-rest-api/src/assets'],
     optimization: false,
     outputHashing: 'none',
   }),
