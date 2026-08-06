@@ -5,14 +5,13 @@ module.exports = composePlugins(
   withNx({
     target: 'node',
     compiler: 'tsc',
-    main: './src/main.ts',
-    tsConfig: './tsconfig.app.json',
+    main: './apps/csfin-rest-api/src/main.ts',
+    tsConfig: './apps/csfin-rest-api/tsconfig.app.json',
     assets: ['./apps/csfin-rest-api/src/assets'],
     optimization: false,
     outputHashing: 'none',
   }),
   (config) => {
-    // Override output path safely after withNx resolves defaults
     config.output = {
       ...(config.output || {}),
       path: join(__dirname, '../../dist/apps/csfin-rest-api'),
