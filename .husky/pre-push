@@ -1,0 +1,18 @@
+# If package.json is staged, verify package-lock.json is also staged
+if git diff --cached --name-only | grep -q "^package.json$"; then
+  if ! git diff --cached --name-only | grep -q "^package-lock.json$"; then
+    echo "❌ Error: You modified package.json but haven't staged package-lock.json."
+    echo "   Run 'npm install' and stage 'package-lock.json'."
+    exit 1
+  fi
+
+  # Run npm install to generate potential lockfile changes
+  npm install --package-lock-only
+
+  # Check if package-lock.json has unstaged changes
+  if ! git diff --exit-code package-lock.json > /dev/null; then
+    echo "❌ Error: package-lock.json is out of sync with package.json."
+    echo "   Run 'npm install' and stage the updated lockfile."
+    exit 1
+  fi
+fi
