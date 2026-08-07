@@ -40,7 +40,8 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       # Clear Nx cache
-      - run: npx nx reset
+      - name: Clear Nx cache
+        run: npx nx reset
 
       # Runs lint, test, and build targets for affected projects in parallel
       - name: Run affected commands
