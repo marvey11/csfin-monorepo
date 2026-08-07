@@ -72,6 +72,5 @@
       "inputs": ["production", "^production"]
     }
   },
-  "analytics": false,
-  "useLegacyCache": true
+  "analytics": false
 }
