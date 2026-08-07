@@ -39,7 +39,7 @@ jobs:
       # Derives base and head SHAs for nx affected
       - uses: nrwl/nx-set-shas@v4
 
-      # Clear Nx cache
+      # Clear Nx cache BEFORE setting environment variables
       - name: Clear Nx cache
         run: npx nx reset
 
@@ -47,6 +47,4 @@ jobs:
       - name: Run affected commands
         env:
           NX_DAEMON: false
-          NX_BASE: ${{ github.event.pull_request.base.sha }}
-          NX_HEAD: ${{ github.event.pull_request.head.sha }}
         run: npx nx affected -t lint test build --parallel=3
