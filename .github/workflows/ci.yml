@@ -44,4 +44,8 @@ jobs:
 
       # Runs lint, test, and build targets for affected projects in parallel
       - name: Run affected commands
+        env:
+          NX_DAEMON: false
+          NX_BASE: ${{ github.event.pull_request.base.sha }}
+          NX_HEAD: ${{ github.event.pull_request.head.sha }}
         run: npx nx affected -t lint test build --parallel=3
