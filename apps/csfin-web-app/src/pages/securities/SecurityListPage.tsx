@@ -37,7 +37,7 @@ export const SecurityListPage = () => {
               }}
               className={twMerge(
                 "flex flex-row justify-between items-center border p-2 cursor-pointer rounded-md hover:shadow-lg",
-                mapSecurityTypeToColors[securityType]
+                mapSecurityTypeToColors[securityType],
               )}
             >
               <span className="flex flex-col mr-2 overflow-x-clip">
@@ -67,7 +67,7 @@ export const SecurityListPage = () => {
   );
 };
 
-const mapSecurityTypeToColors: { [K in SecurityType]: string } = {
+const mapSecurityTypeToColors: Record<SecurityType, string> = {
   etf: "border-green-500 bg-green-100 hover:bg-green-200",
   stock: "border-blue-500 bg-blue-100 hover:bg-blue-200",
 };
