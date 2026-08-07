@@ -39,5 +39,9 @@ jobs:
       # Derives base and head SHAs for nx affected
       - uses: nrwl/nx-set-shas@v4
 
+      # Clear Nx cache
+      - run: npx nx reset
+
       # Runs lint, test, and build targets for affected projects in parallel
-      - run: npx nx affected -t lint test build --parallel=3
+      - name: Run affected commands
+        run: npx nx affected -t lint test build --parallel=3
