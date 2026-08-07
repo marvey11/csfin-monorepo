@@ -26,7 +26,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
     const name = refName.current?.value ?? "";
     const shortName = refShortName.current?.value;
     const securityType = securityTypes.find(
-      (secType) => secType === refSecurityType.current?.value
+      (secType) => secType === refSecurityType.current?.value,
     );
 
     onSubmit({
@@ -115,7 +115,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
   );
 };
 
-const mapSecurityTypeToLabel: { [K in SecurityType]: string } = {
+const mapSecurityTypeToLabel: Record<SecurityType, string> = {
   etf: "ETF",
   stock: "Stock",
 };
