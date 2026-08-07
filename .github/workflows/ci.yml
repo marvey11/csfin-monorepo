@@ -47,4 +47,4 @@ jobs:
       - name: Run affected commands
         env:
           NX_DAEMON: false
-        run: npx nx affected -t lint test build --parallel=3
+        run: npx nx affected --target=lint --target=test --target=build --parallel=3
