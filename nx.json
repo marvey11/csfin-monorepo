@@ -66,11 +66,12 @@
     }
   },
   "targetDefaults": {
-    "@nx/vite:build": {
+    "build": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
   },
-  "analytics": false
+  "analytics": false,
+  "useLegacyCache": true
 }
