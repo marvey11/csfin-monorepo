@@ -16,8 +16,8 @@
     "axios": "^1.18.0",
     "clsx": "^2.1.1",
     "pg": "^8.11.5",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
@@ -48,8 +48,8 @@
     "@testing-library/react": "16.3.2",
     "@types/jest": "30.0.0",
     "@types/node": "^24.0.0",
-    "@types/react": "19.2.9",
-    "@types/react-dom": "19.2.4",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.4",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "8.66.0",
     "@typescript-eslint/parser": "8.66.0",
@@ -89,6 +89,12 @@
       "source-map-loader": "^4.0.0"
     },
     "glob": "^10.4.5",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "brace-expansion": "^5.0.8",
+    "file-type": "^21.3.2",
+    "body-parser": "^1.20.3",
+    "qs": "^6.14.0",
+    "multer": "^2.1.2",
+    "image-size": "^1.1.0"
   }
 }
