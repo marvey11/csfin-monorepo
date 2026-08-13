@@ -6,7 +6,9 @@
     "types": ["node"],
     "emitDecoratorMetadata": true,
     "target": "es2021",
-    "paths": { "@csfin-monorepo/core": ["libs/core/src/index.ts"] }
+    "paths": {
+      "@csfin-monorepo/core": ["libs/core/src/index.ts"]
+    }
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
   "include": ["src/**/*.ts"]

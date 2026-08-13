@@ -9,14 +9,14 @@ import { Security } from "./entities/security.entity";
 export class SecuritiesService {
   constructor(
     @InjectRepository(Security)
-    private securitiesRepository: Repository<Security>
+    private securitiesRepository: Repository<Security>,
   ) {}
 
   async create(
-    createDTO: CreateSecurityDto | CreateSecurityDto[]
+    createDTO: CreateSecurityDto | CreateSecurityDto[],
   ): Promise<Security | Security[]> {
     const decodeItem = (item: string | undefined) =>
-      decodeURIComponent(escape(item));
+      item ? decodeURIComponent(escape(item)) : item;
 
     const decodeDto = (dto: CreateSecurityDto) => ({
       ...dto,

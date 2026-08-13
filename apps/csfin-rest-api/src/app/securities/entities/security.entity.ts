@@ -12,23 +12,23 @@ import { QuoteData } from "../../quotes/entities/quote.entity";
 @Index(["isin", "nsin"], { unique: true })
 export class Security {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column()
-  isin: string;
+  isin!: string;
 
   @Column()
-  nsin: string;
+  nsin!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column({ name: "short_name", nullable: true })
-  shortName: string;
+  shortName!: string;
 
   @Column({ type: "enum", enum: SecurityType })
-  type: SecurityType;
+  type!: SecurityType;
 
   @OneToMany(() => QuoteData, (quote) => quote.security)
-  quotes: QuoteData[];
+  quotes!: QuoteData[];
 }

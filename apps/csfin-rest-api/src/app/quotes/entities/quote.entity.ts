@@ -12,21 +12,21 @@ import { Security } from "../../securities/entities/security.entity";
 @Index(["security.id", "exchange.id", "date"], { unique: true })
 export class QuoteData {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column({ type: "date" })
-  date: Date;
+  date!: Date;
 
   @Column({ type: "numeric" })
-  price: number;
+  price!: number;
 
   @ManyToOne(() => Security, (security) => security.quotes, {
     onDelete: "CASCADE",
   })
-  security: Security;
+  security!: Security;
 
   @ManyToOne(() => SecuritiesExchange, (exchange) => exchange.quotes, {
     onDelete: "CASCADE",
   })
-  exchange: SecuritiesExchange;
+  exchange!: SecuritiesExchange;
 }
