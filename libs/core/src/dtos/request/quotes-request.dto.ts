@@ -15,4 +15,4 @@ interface CreateManyQuotesDto {
 
 type UpdateQuoteDto = Partial<CreateQuoteDataDto>;
 
-export { CreateManyQuotesDto, CreateQuoteDataDto, UpdateQuoteDto };
+export type { CreateManyQuotesDto, CreateQuoteDataDto, UpdateQuoteDto };
