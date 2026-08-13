@@ -4,11 +4,11 @@ import { QuoteData } from "../../quotes/entities/quote.entity";
 @Entity()
 export class SecuritiesExchange {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column({ unique: true })
-  name: string;
+  name!: string;
 
   @OneToMany(() => QuoteData, (quote) => quote.exchange)
-  quotes: QuoteData[];
+  quotes!: QuoteData[];
 }
