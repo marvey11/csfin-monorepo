@@ -3,6 +3,6 @@
  *
  * **Important**: Does not check whether there are enough items!
  */
-const lastItem = <T>(array: T[]): T => array[array.length - 1];
+const lastItem = <T>(array: T[]): T | undefined => array[array.length - 1];
 
 export { lastItem };
