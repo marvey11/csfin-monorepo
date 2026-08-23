@@ -29,7 +29,7 @@
     "@babel/preset-react": "^7.14.5",
     "@eslint/eslintrc": "^3.0.0",
     "@nestjs/schematics": "11.1.0",
-    "@nestjs/testing": "^11.1.29",
+    "@nestjs/testing": "^11.2.1",
     "@nx/eslint": "23.1.1",
     "@nx/eslint-plugin": "23.1.1",
     "@nx/jest": "23.1.1",
