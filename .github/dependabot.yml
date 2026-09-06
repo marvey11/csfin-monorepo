@@ -8,7 +8,13 @@ updates:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
     groups:
+      nx-packages:
+        patterns:
+          - "@nx/*"
       swc:
         patterns:
           - "@swc/*"
           - "@swc-node/*"
+      typescript-eslint-packages:
+        patterns:
+          - "@typescript-eslint/*"
