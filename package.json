@@ -15,6 +15,7 @@
     "@nestjs/typeorm": "^11.0.3",
     "axios": "^1.20.0",
     "clsx": "^2.1.1",
+    "express": "^5.2.1",
     "pg": "^8.11.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -31,16 +32,16 @@
     "@nestjs/schematics": "11.1.0",
     "@nestjs/testing": "^11.2.3",
     "@nx/eslint": "23.2.0",
-    "@nx/eslint-plugin": "23.1.2",
-    "@nx/jest": "23.1.1",
+    "@nx/eslint-plugin": "23.2.0",
+    "@nx/jest": "23.2.0",
     "@nx/js": "23.2.0",
     "@nx/nest": "23.2.0",
-    "@nx/node": "23.1.1",
-    "@nx/react": "23.1.1",
+    "@nx/node": "23.2.0",
+    "@nx/react": "23.2.0",
     "@nx/vite": "23.2.0",
-    "@nx/web": "23.1.1",
-    "@nx/webpack": "23.1.1",
-    "@nx/workspace": "23.1.1",
+    "@nx/web": "23.2.0",
+    "@nx/webpack": "23.2.0",
+    "@nx/workspace": "23.2.0",
     "@swc-node/register": "~1.12.1",
     "@swc/cli": "~0.8.0",
     "@swc/core": "^1.16.1",
@@ -89,13 +90,19 @@
     "@nx/webpack": {
       "source-map-loader": "^4.0.0"
     },
+    "@nx/node": {
+      "express": "$express"
+    },
+    "@nx/react": {
+      "express": "$express"
+    },
+    "body-parser": "^1.20.3",
     "glob": "^10.4.5",
-    "uuid": "^11.1.0",
     "brace-expansion": "^5.0.8",
     "file-type": "^21.3.2",
-    "body-parser": "^1.20.3",
-    "qs": "^6.14.0",
+    "image-size": "^1.1.0",
     "multer": "^2.1.2",
-    "image-size": "^1.1.0"
+    "qs": "^6.14.0",
+    "uuid": "^11.1.0"
   }
 }
