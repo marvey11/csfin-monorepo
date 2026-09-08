@@ -29,7 +29,7 @@
     "@babel/core": "^7.29.6",
     "@babel/preset-react": "^7.14.5",
     "@eslint/eslintrc": "^3.3.7",
-    "@nestjs/schematics": "11.1.0",
+    "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^11.2.3",
     "@nx/eslint": "23.2.0",
     "@nx/eslint-plugin": "23.2.0",
@@ -101,8 +101,16 @@
     "brace-expansion": "^5.0.8",
     "file-type": "^21.3.2",
     "image-size": "^1.1.0",
+    "less": "^4.6.7",
     "multer": "^2.1.2",
     "qs": "^6.14.0",
     "uuid": "^11.1.0"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "@swc/core@1.16.2": true,
+    "less@4.5.1": true,
+    "nx@23.2.0": true,
+    "unrs-resolver@1.12.2": true
   }
 }
