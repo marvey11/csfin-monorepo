@@ -1,7 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root{
-  --navbar-height: 4rem
+:root {
+  --navbar-height: 4rem;
 }
