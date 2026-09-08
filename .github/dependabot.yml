@@ -4,17 +4,32 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
     groups:
       nx-packages:
         patterns:
+          - "nx"
           - "@nx/*"
-      swc:
-        patterns:
-          - "@swc/*"
-          - "@swc-node/*"
+
       typescript-eslint-packages:
         patterns:
           - "@typescript-eslint/*"
+
+      dev-dependencies:
+        dependency-type: "development"
+        exclude-patterns:
+          - "nx"
+          - "@nx/*"
+          - "@typescript-eslint/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      prod-dependencies:
+        dependency-type: "production"
+        exclude-patterns:
+          - "nx"
+          - "@nx/*"
+          - "@typescript-eslint/*"
+        update-types:
+          - "minor"
+          - "patch"
