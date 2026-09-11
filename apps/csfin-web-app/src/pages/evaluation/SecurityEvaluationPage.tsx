@@ -25,15 +25,15 @@ export const SecurityEvaluationPage = () => {
 
   const [sortColumn, setSortColumn] = useLocalStorage<SortColumn>(
     "csfin.evaluation.sort-column",
-    "securityName"
+    "securityName",
   );
   const [sortDirection, setSortDirection] = useLocalStorage<SortDirection>(
     "csfin.evaluation.sort-direction",
-    "desc"
+    "desc",
   );
   const [grouped, setGrouped] = useLocalStorage(
     "csfin.evaluation.group-by-type",
-    false
+    false,
   );
 
   const toggleSortDirection = () => {
@@ -49,8 +49,7 @@ export const SecurityEvaluationPage = () => {
         transformEvaluationData,
       ],
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sendRequest]);
 
   const compareFn = useCallback(
     (one: SecurityEvaluation, two: SecurityEvaluation) => {
@@ -85,11 +84,11 @@ export const SecurityEvaluationPage = () => {
         securityName: fullCompare(one.securityName, two.securityName),
         weighted: fullCompare(
           weightedEval(one.evaluation),
-          weightedEval(two.evaluation)
+          weightedEval(two.evaluation),
         ),
       }[sortColumn];
     },
-    [grouped, sortColumn, sortDirection]
+    [grouped, sortColumn, sortDirection],
   );
 
   const flattenedEvaluationData: SecurityEvaluation[] | undefined = useMemo(
@@ -102,10 +101,10 @@ export const SecurityEvaluationPage = () => {
             securityType,
             exchangeName: name,
             evaluation: getEvaluatedQuoteData(quoteData),
-          }))
+          })),
         )
         .flat(),
-    [data]
+    [data],
   );
 
   const sortedData = useMemo(() => {

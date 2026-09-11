@@ -12,21 +12,21 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
 
   const securityTypes = Object.values(SecurityType);
 
-  const refISIN = useRef<HTMLInputElement>(null);
-  const refNSIN = useRef<HTMLInputElement>(null);
-  const refName = useRef<HTMLInputElement>(null);
-  const refShortName = useRef<HTMLInputElement>(null);
-  const refSecurityType = useRef<HTMLSelectElement>(null);
+  const isinRef = useRef<HTMLInputElement>(null);
+  const nsinRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const shortNameRef = useRef<HTMLInputElement>(null);
+  const securityTypeRef = useRef<HTMLSelectElement>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isin = refISIN.current?.value ?? "";
-    const nsin = refNSIN.current?.value ?? "";
-    const name = refName.current?.value ?? "";
-    const shortName = refShortName.current?.value;
+    const isin = isinRef.current?.value ?? "";
+    const nsin = nsinRef.current?.value ?? "";
+    const name = nameRef.current?.value ?? "";
+    const shortName = shortNameRef.current?.value;
     const securityType = securityTypes.find(
-      (secType) => secType === refSecurityType.current?.value,
+      (secType) => secType === securityTypeRef.current?.value,
     );
 
     onSubmit({
@@ -45,7 +45,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       <label htmlFor="security-isin">ISIN:</label>
       <input
         id="security-isin"
-        ref={refISIN}
+        ref={isinRef}
         type="text"
         defaultValue={value?.isin ?? ""}
         className="border"
@@ -55,7 +55,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       <label htmlFor="security-nsin">NSIN:</label>
       <input
         id="security-nsin"
-        ref={refNSIN}
+        ref={nsinRef}
         type="text"
         defaultValue={value?.nsin ?? ""}
         className="border"
@@ -65,7 +65,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       <label htmlFor="security-name">Name:</label>
       <input
         id="security-name"
-        ref={refName}
+        ref={nameRef}
         type="text"
         defaultValue={value?.name ?? ""}
         className="border"
@@ -75,7 +75,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       <label htmlFor="security-short-name">Short Name:</label>
       <input
         id="security-short-name"
-        ref={refShortName}
+        ref={shortNameRef}
         type="text"
         defaultValue={value?.shortName ?? ""}
         placeholder="(optional)"
@@ -85,7 +85,7 @@ export const SecurityForm = ({ value, onSubmit }: SecurityFormProps) => {
       <label htmlFor="security-type">Security Type:</label>
       <select
         id="security-type"
-        ref={refSecurityType}
+        ref={securityTypeRef}
         defaultValue={value?.type}
       >
         {securityTypes.map((securityType) => (

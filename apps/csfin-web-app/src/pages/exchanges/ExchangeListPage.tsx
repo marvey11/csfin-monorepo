@@ -12,8 +12,7 @@ export const ExchangeListPage = () => {
 
   useEffect(() => {
     sendRequest({ url: "/exchanges", method: "get" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sendRequest]);
 
   return (
     <DataPageContainer isLoading={loading} error={error}>

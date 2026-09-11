@@ -11,9 +11,10 @@ export const SecurityLayout = () => {
     useAxios<SecurityResponseData>();
 
   useEffect(() => {
-    id && sendRequest({ url: `/securities/${id}`, method: "get" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    if (id) {
+      sendRequest({ url: `/securities/${id}`, method: "get" });
+    }
+  }, [id, sendRequest]);
 
   return (
     <Outlet

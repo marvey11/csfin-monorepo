@@ -1,6 +1,6 @@
+import { ExchangeData } from "@csfin-monorepo/core";
 import { FormEvent, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ExchangeData } from "../types";
 
 interface ExchangeFormProps {
   value?: ExchangeData;
@@ -10,12 +10,12 @@ interface ExchangeFormProps {
 export const ExchangeForm = ({ value, onSubmit }: ExchangeFormProps) => {
   const navigate = useNavigate();
 
-  const refName = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const name = refName.current?.value ?? "";
+    const name = nameRef.current?.value ?? "";
 
     onSubmit({ name });
 
@@ -27,7 +27,7 @@ export const ExchangeForm = ({ value, onSubmit }: ExchangeFormProps) => {
       <label htmlFor="exchange-name">Name:</label>
       <input
         id="exchange-name"
-        ref={refName}
+        ref={nameRef}
         type="text"
         defaultValue={value?.name ?? ""}
         className="border"
