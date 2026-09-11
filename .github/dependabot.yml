@@ -10,6 +10,10 @@ updates:
           - "nx"
           - "@nx/*"
 
+      nestjs-packages:
+        patterns:
+          - "@nestjs/*"
+
       typescript-eslint-packages:
         patterns:
           - "@typescript-eslint/*"
@@ -19,6 +23,7 @@ updates:
         exclude-patterns:
           - "nx"
           - "@nx/*"
+          - "@nestjs/*"
           - "@typescript-eslint/*"
         update-types:
           - "minor"
@@ -29,6 +34,7 @@ updates:
         exclude-patterns:
           - "nx"
           - "@nx/*"
+          - "@nestjs/*"
           - "@typescript-eslint/*"
         update-types:
           - "minor"
