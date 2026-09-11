@@ -4,38 +4,57 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
     groups:
-      nx-packages:
+      # Nx tooling & plugins
+      nx-ecosystem:
         patterns:
           - "nx"
           - "@nx/*"
 
-      nestjs-packages:
+      # NestJS framework & modules
+      nestjs-ecosystem:
         patterns:
           - "@nestjs/*"
 
-      typescript-eslint-packages:
+      # React ecosystem & types
+      react-ecosystem:
         patterns:
-          - "@typescript-eslint/*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
 
+      # Linting and static analysis
+      linting-tools:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
+          - "prettier*"
+
+      # Catch-all for remaining minor/patch dev dependencies
       dev-dependencies:
         dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
         exclude-patterns:
           - "nx"
           - "@nx/*"
           - "@nestjs/*"
+          - "react*"
+          - "@types/react*"
+          - "eslint*"
           - "@typescript-eslint/*"
-        update-types:
-          - "minor"
-          - "patch"
+          - "prettier*"
 
+      # Catch-all for remaining minor/patch production dependencies
       prod-dependencies:
         dependency-type: "production"
-        exclude-patterns:
-          - "nx"
-          - "@nx/*"
-          - "@nestjs/*"
-          - "@typescript-eslint/*"
         update-types:
           - "minor"
           - "patch"
+        exclude-patterns:
+          - "@nestjs/*"
+          - "react*"
