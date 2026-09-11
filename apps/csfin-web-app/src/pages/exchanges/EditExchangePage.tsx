@@ -11,13 +11,14 @@ export const EditExchangePage = () => {
   } = useOutletContextData<ExchangeResponseData>();
 
   const updateExchange = (data: ExchangeData) => {
-    exchange &&
+    if (exchange) {
       sendRequest({ url: `/exchanges/${exchange.id}`, method: "patch", data });
+    }
   };
 
   return (
     <DataPageContainer isLoading={loading} error={error}>
-      <h1 className="text-4xl font-extrabold">Create Exchange</h1>;
+      <h1 className="text-4xl font-extrabold">Create Exchange</h1>s
       {exchange && <ExchangeForm value={exchange} onSubmit={updateExchange} />}
     </DataPageContainer>
   );

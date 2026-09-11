@@ -1,22 +1,28 @@
+import eslintReact from "@eslint-react/eslint-plugin";
+import reactHooks from "eslint-plugin-react-hooks";
 import baseConfig from "../../eslint.config.mjs";
-import nx from "@nx/eslint-plugin";
 
 export default [
   ...baseConfig,
-  ...nx.configs["flat/react"],
+  eslintReact.configs.recommended,
+  {
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+    },
+  },
   {
     files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-    // Override or add rules here
     rules: {},
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
-    // Override or add rules here
     rules: {},
   },
   {
     files: ["**/*.js", "**/*.jsx"],
-    // Override or add rules here
     rules: {},
   },
 ];

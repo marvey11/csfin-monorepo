@@ -24,7 +24,7 @@ export const DataPageContainer = ({
   if (error) {
     return (
       <div className="flex justify-center p-4">
-        <ErrorMessage>{error}</ErrorMessage>;
+        <ErrorMessage>{error}</ErrorMessage>
       </div>
     );
   }

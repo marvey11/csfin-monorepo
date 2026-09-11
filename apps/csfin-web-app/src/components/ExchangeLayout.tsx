@@ -11,9 +11,10 @@ export const ExchangeLayout = () => {
     useAxios<ExchangeResponseData>();
 
   useEffect(() => {
-    id && sendRequest({ url: `/exchanges/${id}`, method: "get" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    if (id) {
+      sendRequest({ url: `/exchanges/${id}`, method: "get" });
+    }
+  }, [id, sendRequest]);
 
   return (
     <Outlet
