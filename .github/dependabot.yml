@@ -13,6 +13,7 @@ updates:
           - "nx"
           - "@nx/*"
 
+      # Vitest test framework & plugins
       vitest-packages:
         patterns:
           - "vitest"
@@ -50,8 +51,10 @@ updates:
           - "vitest"
           - "@vitest/*"
           - "@nestjs/*"
-          - "react*"
-          - "@types/react*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
           - "eslint*"
           - "@typescript-eslint/*"
           - "prettier*"
@@ -64,4 +67,9 @@ updates:
           - "patch"
         exclude-patterns:
           - "@nestjs/*"
-          - "react*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "vitest"
+          - "@vitest/*"
