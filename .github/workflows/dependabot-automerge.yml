@@ -1,6 +1,8 @@
 name: Dependabot Auto-Merge
 
-on: pull_request
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -9,7 +11,8 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    # Check PR author explicitly
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Fetch Dependabot Metadata
         id: metadata
@@ -17,8 +20,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Enable Auto-Merge for Dependabot PRs
-        # Optional: restrict auto-merge to patch/minor updates
+      - name: Enable Auto-Merge for Non-Major Updates
         if: steps.metadata.outputs.update-type != 'version-update:semver-major'
         run: gh pr merge --auto --squash "$PR_URL"
         env:
