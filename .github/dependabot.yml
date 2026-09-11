@@ -13,6 +13,11 @@ updates:
           - "nx"
           - "@nx/*"
 
+      vitest-packages:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+
       # NestJS framework & modules
       nestjs-ecosystem:
         patterns:
@@ -42,6 +47,8 @@ updates:
         exclude-patterns:
           - "nx"
           - "@nx/*"
+          - "vitest"
+          - "@vitest/*"
           - "@nestjs/*"
           - "react*"
           - "@types/react*"
