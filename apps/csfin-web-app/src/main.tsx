@@ -5,7 +5,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-} from "react-router-dom";
+} from "react-router";
 import App from "./app/App";
 import { ExchangeLayout, SecurityLayout } from "./components";
 import {
@@ -41,16 +41,16 @@ const router = createBrowserRouter(
           <Route path="edit" element={<EditExchangePage />} />
         </Route>
       </Route>
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 root.render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

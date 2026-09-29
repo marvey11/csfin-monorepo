@@ -19,7 +19,7 @@
     "pg": "^8.11.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.4",
+    "react-router": "^8.4.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
@@ -54,7 +54,7 @@
     "@types/node": "^26.6.3",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.7",
-    "@types/react-router-dom": "^5.3.3",
+    "@types/react-router": "^5.1.20",
     "@vitejs/plugin-react": "^6.1.1",
     "@vitest/coverage-v8": "^5.0.1",
     "@vitest/ui": "^5.0.1",
@@ -87,14 +87,18 @@
     "webpack-cli": "7.2.3"
   },
   "overrides": {
-    "@nx/webpack": {
-      "source-map-loader": "^4.0.0"
+    "@nx/nest": {
+      "@nestjs/common": "$@nestjs/common",
+      "@nestjs/core": "$@nestjs/core"
     },
     "@nx/node": {
       "express": "$express"
     },
     "@nx/react": {
       "express": "$express"
+    },
+    "@nx/webpack": {
+      "source-map-loader": "^4.0.0"
     },
     "body-parser": "^1.20.3",
     "brace-expansion": "^5.0.8",
@@ -104,6 +108,7 @@
     "image-size": "^1.1.0",
     "less": "^4.6.7",
     "multer": "^2.1.2",
+    "smol-toml": "^1.7.1",
     "qs": "^6.14.0",
     "uuid": "^11.1.0"
   },
@@ -111,7 +116,7 @@
     "@parcel/watcher@2.6.0": true,
     "@swc/core@1.16.2": true,
     "less@4.5.1": true,
-    "nx@23.2.0": true,
+    "nx@23.2.1": true,
     "unrs-resolver@1.12.2": true
   }
 }

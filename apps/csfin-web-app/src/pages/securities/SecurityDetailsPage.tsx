@@ -1,6 +1,6 @@
 import { SecurityResponseData } from "@csfin-monorepo/core";
 import { AxiosRequestConfig } from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { DataPageContainer } from "../../components";
 import { useOutletContextData } from "../../hooks";
 
