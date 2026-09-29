@@ -1,6 +1,6 @@
 import { SecurityResponseData, SecurityType } from "@csfin-monorepo/core";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { DataPageContainer } from "../../components";
 import { useAxios } from "../../hooks";
