@@ -22,7 +22,7 @@
     "react-router": "^8.5.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.9.1",
     "typeorm": "^1.1.2"
   },
   "devDependencies": {
